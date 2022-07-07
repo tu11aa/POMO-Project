@@ -4,8 +4,8 @@
   "description": "POMO Project",
   "main": "server.js",
   "scripts": {
-    "start": "node Backen/server.js",
-    "server": "nodemon Backen/server.js"
+    "start": "node Backend/server.js",
+    "server": "nodemon Backend/server.js"
   },
   "author": "Tu1a",
   "license": "MIT",
