@@ -1,0 +1,22 @@
+{
+  "name": "pomo_project",
+  "version": "1.0.0",
+  "description": "POMO Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node Backen/server.js",
+    "server": "nodemon Backen/server.js"
+  },
+  "author": "Tu1a",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
