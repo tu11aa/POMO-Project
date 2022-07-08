@@ -1,6 +1,6 @@
 //control what happen when user route is  called
 const asyncHandler = require("express-async-handler");
-const User = require("../models/userModels");
+const { User } = require("../models/userModels");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 

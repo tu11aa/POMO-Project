@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 //User object (User table from database)
 
-const userinfoSchema = mongoose.Schema(
+const user_schema = mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: [true, "Please add a name"],
+      unique: true,
     },
     email: {
       type: String,
@@ -16,10 +17,9 @@ const userinfoSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
-    is_Amind: {
-      type: Boolean,
-      required: true,
-      default: false,
+    fullname: {
+      type: String,
+      required: [true, "Please add a name"],
     },
   },
   {
@@ -27,4 +27,36 @@ const userinfoSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User_info", userinfoSchema);
+const user_info_schema = mongoose.Schema(
+  {
+    user_id: {
+      type: String,
+      required: [true, "Please add a name"],
+      unique: true,
+    },
+    nickname: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    dob: {
+      type: Date,
+    },
+    schoolS: {
+      type: Array,
+      default: [],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const User = mongoose.model("User", user_schema);
+const user_info = mongoose.model("User Infomation", user_info_schema);
+
+module.exports = { User, user_info };
