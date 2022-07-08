@@ -49,4 +49,37 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser };
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user) {
+    if (await bcrypt.compare(password, user.password)) {
+      res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(401);
+      throw new Error("Wrong password");
+    }
+  } else {
+    res.status(401);
+    throw new Error("User not found");
+  }
+});
+
+//get user info (private)
+const getMe = asyncHandler(async (req, res) => {
+  const user = {
+    _id: req.user._id,
+    email: req.user.email,
+    name: req.user.name,
+  };
+  res.status(200).json(user);
+});
+
+module.exports = { registerUser, loginUser, getMe };
