@@ -11,15 +11,15 @@ const generateToken = (id) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password, fullname } = req.body;
 
-  if (!name || !email || !password) {
+  if (!username || !email || !password) {
     res.status(400);
     throw new Error("Please include all fields");
   }
 
   //check if user is exist
-  if (await User.findOne({ email })) {
+  if (await User.findOne({ username })) {
     res.status(400);
     throw new Error("User already exists");
   }
@@ -30,9 +30,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // Create user
   const user = await User.create({
-    name,
+    username,
     email,
     password: hashed_password,
+    fullname,
   });
 
   //res token
@@ -50,15 +51,15 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ username });
 
   if (user) {
     if (await bcrypt.compare(password, user.password)) {
       res.status(200).json({
         _id: user._id,
-        name: user.name,
+        username: user.username,
         email: user.email,
         token: generateToken(user._id),
       });
