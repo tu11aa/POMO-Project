@@ -59,7 +59,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
     if (await bcrypt.compare(password, admin.password)) {
       res.status(200).json({
         _id: admin._id,
-        name: admin.name,
+        admin_name: admin.admin_name,
         email: admin.email,
         token: generateToken(admin._id),
       });
@@ -73,4 +73,13 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerAdmin, loginAdmin };
+const getMe = asyncHandler(async (req, res) => {
+  const user = {
+    _id: req.user._id,
+    email: req.user.email,
+    admin_name: req.user.admin_name,
+  };
+  res.status(200).json(user);
+});
+
+module.exports = { registerAdmin, loginAdmin, getMe };
