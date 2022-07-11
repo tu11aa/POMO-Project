@@ -93,9 +93,6 @@ const user_data_schema = mongoose.Schema(
       default: 0,
     },
   },
-  {
-    timestamps: true,
-  }
 );
 
 const User = mongoose.model("User", user_schema);
