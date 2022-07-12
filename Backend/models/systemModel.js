@@ -44,10 +44,12 @@ const roomSchema = mongoose.Schema(
     type: {
       type: String,
       required: [true, "Please include type of room"],
+      enum: ["Private", "Public"],
+      default: "Private",
     },
     name: {
       type: String,
-      default: "",
+      required: [true, "Please add a name"],
     },
     password: {
       type: String,
