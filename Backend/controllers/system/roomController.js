@@ -1,25 +1,22 @@
 const asyncHandler = require("express-async-handler");
-const { mongo, default: mongoose } = require("mongoose");
 const { Room } = require("../../models/systemModel");
 const { User } = require("../../models/userModels");
 
-const createRoom = asyncHandler(async (req, res) => {
-  const { type, name, password, room_master, member_id, report_id } = req.body;
+const getRooms = asyncHandler(async (req, res) => {
+  const rooms = await Room.find({ room_master: req.user._id });
+  res.status(200).json(rooms);
+});
 
-  if (!type || !name || !room_master) {
+const createRoom = asyncHandler(async (req, res) => {
+  const { type, name, password, member_id, report_id } = req.body;
+
+  if (!type || !name) {
     res.status(400);
     throw new Error("Please include all fields");
   }
 
-  //check if user is exist
-  const user = await User.findById(room_master);
-  if (!user) {
-    res.status(400);
-    throw new Error("Room master is not exits");
-  }
-
   //check if room's name is same
-  if (await Room.findOne({ room_master: user._id, name: name })) {
+  if (await Room.findOne({ room_master: req.user._id, name: name })) {
     res.status(400);
     throw new Error("Room with same name is extis");
   }
@@ -28,7 +25,7 @@ const createRoom = asyncHandler(async (req, res) => {
     type,
     name,
     password,
-    room_master: user._id,
+    room_master: req.user._id,
     member_id,
     report_id,
   });
@@ -41,19 +38,17 @@ const createRoom = asyncHandler(async (req, res) => {
   }
 });
 
+//route api/rooms/:id
 const deleteRoom = asyncHandler(async (req, res) => {
-  const { id: _id } = req.body;
-
-  if (!id) {
-    res.status(400);
-    throw new Error("Please include all fields");
-  }
-
-  //check if room is exist
-  const room = await Room.findById(id);
+  const room = Room.findById(req.params.id);
   if (!room) {
     res.status(400);
-    throw new Error("Room is not exits");
+    throw new Error("Room not found");
+  }
+
+  if (!room.room_master.equals(req.user._id)) {
+    res.status(401);
+    throw new Error("Not authorized");
   }
 
   const rs = await room.remove();
@@ -61,4 +56,24 @@ const deleteRoom = asyncHandler(async (req, res) => {
   res.status(200).json(rs);
 });
 
-module.exports = { createRoom, deleteRoom };
+//route api/rooms/:id
+const updateRoom = asyncHandler(async (req, res) => {
+  let room = await Room.findById(req.params.id);
+  if (!room) {
+    res.status(400);
+    throw new Error("Room not found");
+  }
+
+  if (!room.room_master.equals(req.user._id)) {
+    res.status(401);
+    throw new Error("Not authorized");
+  }
+
+  const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(updatedRoom);
+});
+
+module.exports = { createRoom, deleteRoom, updateRoom, getRooms };

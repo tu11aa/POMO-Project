@@ -35,7 +35,7 @@ const protectAdmin = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET); //decoded to get id
       //didn't add check expire day
 
-      req.user = await Admin.findById(decoded.id).select("-password"); //get user by id deselect password
+      req.admin = await Admin.findById(decoded.id).select("-password"); //get user by id deselect password
 
       next();
     } catch (error) {
