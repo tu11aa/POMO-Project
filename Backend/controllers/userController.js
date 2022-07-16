@@ -78,4 +78,15 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
-module.exports = { registerUser, loginUser, getMe };
+//route: api/users/:id
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  res.status(200).json(user);
+});
+
+module.exports = { registerUser, loginUser, getMe, getUser };

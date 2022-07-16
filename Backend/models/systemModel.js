@@ -7,7 +7,7 @@ const scheduleSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    data: {
+    date: {
       type: Date,
       required: [true, "Please add a date"],
     },
