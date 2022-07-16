@@ -37,6 +37,10 @@ const user_schema = mongoose.Schema(
       type: [String],
       default: [],
     },
+    score: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -72,30 +76,27 @@ const user_schema = mongoose.Schema(
 //   }
 // );
 
-const user_data_schema = mongoose.Schema(
-  {
-    user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      unique: true,
-    },
-    schedule_ids: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Schedule" }],
-      default: [],
-    },
-    result_ids: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "None" }], //result table saved on localstorage
-      default: [],
-    },
-    score: {
-      type: Number,
-      default: 0,
-    },
-  },
-);
+// const user_data_schema = mongoose.Schema({
+//   user_id: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "User",
+//     required: true,
+//     unique: true,
+//   },
+//   schedule_ids: {
+//     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Schedule" }],
+//     default: [],
+//   },
+//   result_ids: {
+//     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "None" }], //result table saved on localstorage
+//     default: [],
+//   },
+//   score: {
+//     type: Number,
+//     default: 0,
+//   },
+// });
 
 const User = mongoose.model("User", user_schema);
-const UserData = mongoose.model("User Data", user_data_schema);
 
-module.exports = { User, UserData };
+module.exports = { User };

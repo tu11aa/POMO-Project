@@ -74,12 +74,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
 });
 
 const getMe = asyncHandler(async (req, res) => {
-  const user = {
-    _id: req.user._id,
-    email: req.user.email,
-    admin_name: req.user.admin_name,
-  };
-  res.status(200).json(user);
+  res.status(200).json(req.admin);
 });
 
 module.exports = { registerAdmin, loginAdmin, getMe };

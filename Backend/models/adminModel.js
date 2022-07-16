@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const admin_schema = mongoose.Schema(
   {
-    admin_name: {
+    adminname: {
       type: String,
       required: [true, "Please add a name"],
       unique: true,

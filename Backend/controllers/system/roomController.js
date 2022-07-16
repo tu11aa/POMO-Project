@@ -8,7 +8,7 @@ const getRooms = asyncHandler(async (req, res) => {
 });
 
 const createRoom = asyncHandler(async (req, res) => {
-  const { type, name, password, member_id, report_id } = req.body;
+  const { type, name, password, memberIDs, reportIDs } = req.body;
 
   if (!type || !name) {
     res.status(400);
@@ -25,9 +25,9 @@ const createRoom = asyncHandler(async (req, res) => {
     type,
     name,
     password,
-    room_master: req.user._id,
-    member_id,
-    report_id,
+    roomMaster: req.user._id,
+    memberIDs,
+    reportIDs,
   });
 
   if (room) {
