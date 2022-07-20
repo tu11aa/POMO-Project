@@ -2,18 +2,8 @@ const asyncHandler = require("express-async-handler");
 const { Room } = require("../../models/systemModel");
 
 const getRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find({ roomMaster: req.user._id });
+  const rooms = await Room.find({ roomMaster: req.user._id }).populate("Task");
   res.status(200).json(rooms);
-});
-
-const getRoom = asyncHandler(async (req, res) => {
-  const room = await Room.findById(req.params.id);
-  if (!room) {
-    res.status(400);
-    throw new Error("Room not found");
-  }
-
-  res.status(200).json(room);
 });
 
 const createRoom = asyncHandler(async (req, res) => {
@@ -85,19 +75,27 @@ const updateRoom = asyncHandler(async (req, res) => {
   res.status(200).json(updatedRoom);
 });
 
-const deleteRoomByuserID = asyncHandler(async (req, res, userID = "62cbf741d3e3f7707a52e158") => {
-  const rooms = await Room.find({ userID: userID });
-  if (rooms.length === 0) {
-    res.status(400);
-    throw new Error("Room not found");
+const deleteRoomByuserID = asyncHandler(
+  async (req, res, userID = "62cbf741d3e3f7707a52e158") => {
+    const rooms = await Room.find({ userID: userID });
+    if (rooms.length === 0) {
+      res.status(400);
+      throw new Error("Room not found");
+    }
+
+    //delete all task first
+    rooms.forEach(async (room) => {
+      await room.remove();
+    });
+
+    res.status(200).json({ message: "Success" });
   }
+);
 
-  //delete all task first
-  rooms.forEach(async (room) => {
-    await room.remove();
-  });
-
-  res.status(200).json({ message: "Success" });
-});
-
-module.exports = { createRoom, deleteRoom, updateRoom, getRooms, getRoom, deleteRoomByuserID };
+module.exports = {
+  createRoom,
+  deleteRoom,
+  updateRoom,
+  getRooms,
+  deleteRoomByuserID,
+};

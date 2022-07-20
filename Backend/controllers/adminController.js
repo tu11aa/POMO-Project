@@ -1,35 +1,39 @@
 const asyncHandler = require("express-async-handler");
+const authHelper = require("../helpers/authHelper");
+const helper = require("../helpers/helper");
 const Admin = require("../models/adminModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-};
+const httpStatus = require("http-status");
 
 const registerAdmin = asyncHandler(async (req, res) => {
-  const { admin_name, email, password, fullname, phone } = req.body;
+  const { adminName, email, password, fullname, phone } = req.body;
 
-  if (!admin_name || !email || !password) {
-    res.status(400);
-    throw new Error("Please include all fields");
+  if (!adminName || !email || !password) {
+    helper.sendRes(
+      res,
+      httpStatus.BAD_REQUEST,
+      null,
+      "Please include all fields"
+    );
   }
 
   //check if admin is exist
-  if (await Admin.findOne({ admin_name })) {
-    res.status(400);
-    throw new Error("Admin already exists");
+  const findAmind = await Admin.findOne({ adminName });
+  const findAmindEmail = await Admin.findOne({ email });
+  if (findAmind || findAmindEmail) {
+    helper.sendRes(
+      res,
+      httpStatus.BAD_REQUEST,
+      null,
+      "Admin or email already exists"
+    );
   }
 
   // Hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashed_password = await bcrypt.hash(password, salt);
+  const hashed_password = await authHelper.hashPassword(password, 10);
 
   // Create admin
   const admin = await Admin.create({
-    admin_name,
+    adminName,
     password: hashed_password,
     email,
     fullname,
@@ -38,43 +42,42 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
   //res token
   if (admin) {
-    res.status(201).json({
+    data = {
       _id: admin._id,
       name: admin.name,
       email: admin.email,
-      token: generateToken(admin._id),
-    });
+      token: authHelper.generateToken(admin._id, "30d"),
+    };
+    helper.sendRes(res, httpStatus.CREATED, data);
   } else {
-    res.status(400);
-    throw new error("Invalid admin data");
+    helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Invalid admin data");
   }
 });
 
 const loginAdmin = asyncHandler(async (req, res) => {
-  const { admin_name, password } = req.body;
+  const { adminName, password } = req.body;
 
-  const admin = await Admin.findOne({ admin_name });
+  const admin = await Admin.findOne({ adminName });
 
   if (admin) {
-    if (await bcrypt.compare(password, admin.password)) {
-      res.status(200).json({
+    if (await authHelper.comparePassword(password, admin.password)) {
+      data = {
         _id: admin._id,
         admin_name: admin.admin_name,
         email: admin.email,
         token: generateToken(admin._id),
-      });
+      };
+      helper.sendRes(res, httpStatus.OK, data);
     } else {
-      res.status(401);
-      throw new Error("Wrong password");
+      helper.sendRes(res, httpStatus.UNAUTHORIZED, null, "Wrong password");
     }
   } else {
-    res.status(401);
-    throw new Error("Admin not found");
+    helper.sendRes(res, httpStatus.UNAUTHORIZED, null, "Admin not found");
   }
 });
 
 const getMe = asyncHandler(async (req, res) => {
-  res.status(200).json(req.admin);
+  helper.sendRes(res, httpStatus.OK, req.admin);
 });
 
 module.exports = { registerAdmin, loginAdmin, getMe };

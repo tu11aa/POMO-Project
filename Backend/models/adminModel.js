@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const admin_schema = mongoose.Schema(
+const adminSchema = mongoose.Schema(
   {
-    adminname: {
+    adminName: {
       type: String,
       required: [true, "Please add a name"],
       unique: true,
@@ -29,4 +29,4 @@ const admin_schema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Admin", admin_schema);
+module.exports = mongoose.model("Admin", adminSchema);
