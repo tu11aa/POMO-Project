@@ -17,9 +17,9 @@ const registerAdmin = asyncHandler(async (req, res) => {
   }
 
   //check if admin is exist
-  const findAmind = await Admin.findOne({ adminName });
-  const findAmindEmail = await Admin.findOne({ email });
-  if (findAmind || findAmindEmail) {
+  if (
+    await Admin.findOne({ $or: [{ adminName: adminName }, { email: email }] })
+  ) {
     helper.sendRes(
       res,
       httpStatus.BAD_REQUEST,

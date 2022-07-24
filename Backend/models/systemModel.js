@@ -11,12 +11,6 @@ const scheduleSchema = mongoose.Schema(
       type: Date,
       required: [true, "Please add a date"],
     },
-    taskIDs: {
-      type: [
-        { type: mongoose.Schema.Types.ObjectID, ref: "Task", required: true },
-      ],
-      default: [],
-    },
   },
   {
     timestamps: true,

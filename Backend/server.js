@@ -19,6 +19,8 @@ app.use("/api/admins", require("./routes/adminRoutes"));
 app.use("/api/systems", require("./routes/systemRoutes"));
 
 app.use("/api/rooms", require("./routes/system/roomRoutes"));
+app.use("/api/schedules", require("./routes/system/scheduleRoutes"));
+app.use("/api/tasks", require("./routes/system/taskRoutes"));
 
 //need route, because its created and add to a schedule so routes seem difference
 // app.use("/api/tasks", require("./routes/system/taskRoutes"));

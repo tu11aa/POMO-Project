@@ -10,8 +10,9 @@ authHelper.generateToken = (id, exp) => {
   });
 };
 
-authHelper.decodeToken = async (token) => {
-  return jwt.verify(token, process.env.JWT_SECRET);
+authHelper.decodeToken = (token) => {
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  return decoded.id;
 };
 
 authHelper.hashPassword = async (password, length) => {
@@ -19,7 +20,7 @@ authHelper.hashPassword = async (password, length) => {
   return await bcrypt.hash(password, salt);
 };
 
-authHelper.comparePassword = async (pass, hashPassword) => {
+authHelper.comparePassword = async (password, hashPassword) => {
   return await bcrypt.compare(password, hashPassword);
 };
 

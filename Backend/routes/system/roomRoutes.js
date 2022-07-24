@@ -4,7 +4,6 @@ const {
   deleteRoom,
   updateRoom,
   getRooms,
-  getRoom,
   deleteRoomByuserID,
 } = require("../../controllers/system/roomController");
 const { protect, protectAdmin } = require("../../middlewares/authMiddelware");

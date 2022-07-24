@@ -1,8 +1,12 @@
 const asyncHandler = require("express-async-handler");
+const helper = require("../../helpers/helper");
+const methodHelper = require("../../helpers/methodHelper");
 const { Room } = require("../../models/systemModel");
 
 const getRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find({ roomMaster: req.user._id }).populate("Task");
+  const rooms = await Room.find({ roomMaster: req.user._id }).populate(
+    "reportIDs"
+  );
   res.status(200).json(rooms);
 });
 
@@ -10,17 +14,15 @@ const createRoom = asyncHandler(async (req, res) => {
   const { type, name, password, memberIDs, reportIDs } = req.body;
 
   if (!type || !name) {
-    res.status(400);
-    throw new Error("Please include all fields");
+    helper.sendRes(res, 400, null, "Please include all fields");
   }
 
   //check if room's name is same
   if (await Room.findOne({ room_master: req.user._id, name: name })) {
-    res.status(400);
-    throw new Error("Room with same name is extis");
+    helper.sendRes(res, 400, null, "Room with same name is extis");
   }
 
-  const room = await Room.create({
+  methodHelper.createDocument(res, Room, {
     type,
     name,
     password,
@@ -28,67 +30,34 @@ const createRoom = asyncHandler(async (req, res) => {
     memberIDs,
     reportIDs,
   });
-
-  if (room) {
-    res.status(201).json(room);
-  } else {
-    res.status(400);
-    throw new error("Invalid room data");
-  }
 });
 
 //route api/rooms/:id
 const deleteRoom = asyncHandler(async (req, res) => {
-  const room = Room.findById(req.params.id);
-  if (!room) {
-    res.status(400);
-    throw new Error("Room not found");
-  }
-
-  if (!room.room_master.equals(req.user._id)) {
-    res.status(401);
-    throw new Error("Not authorized");
-  }
-
-  const rs = await room.remove();
-
-  res.status(200).json(rs);
+  await methodHelper.deleteDocument(
+    res,
+    Room,
+    "Room",
+    req.params.id,
+    async (room) => await room.room_master.equals(req.user._id)
+  );
 });
 
 //route api/rooms/:id
 const updateRoom = asyncHandler(async (req, res) => {
-  let room = await Room.findById(req.params.id);
-  if (!room) {
-    res.status(400);
-    throw new Error("Room not found");
-  }
-
-  if (!room.roomMaster.equals(req.user._id)) {
-    res.status(401);
-    throw new Error("Not authorized");
-  }
-
-  const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-
-  res.status(200).json(updatedRoom);
+  methodHelper.updateDocument(
+    res,
+    Room,
+    "Room",
+    req.params.id,
+    req.body,
+    async (room) => await room.roomMaster.equals(req.user._id)
+  );
 });
 
 const deleteRoomByuserID = asyncHandler(
   async (req, res, userID = "62cbf741d3e3f7707a52e158") => {
-    const rooms = await Room.find({ userID: userID });
-    if (rooms.length === 0) {
-      res.status(400);
-      throw new Error("Room not found");
-    }
-
-    //delete all task first
-    rooms.forEach(async (room) => {
-      await room.remove();
-    });
-
-    res.status(200).json({ message: "Success" });
+    await methodHelper.deleteByuserID(res, Room, "Room", userID);
   }
 );
 
