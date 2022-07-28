@@ -41,14 +41,9 @@ const deleteSchedule = asyncHandler(async (req, res) => {
   );
 });
 
-const deleteScheduleByuserID = asyncHandler(async (req, res, userID) => {
-  methodHelper.deleteByuserID(res, Schedule, "Schedule", userID);
-});
-
 module.exports = {
   createSchedule,
   updateSchedule,
   getSchedules,
   deleteSchedule,
-  deleteScheduleByuserID,
 };

@@ -5,13 +5,20 @@ const helper = require("./helper");
 
 const methodHelper = {};
 
-methodHelper.createDocument = async (res, Model, data, callback = null) => {
+methodHelper.createDocument = async (
+  res,
+  Model,
+  data,
+  callback = null,
+  stop = null
+) => {
   const model = await Model.create(data);
   if (data) {
     if (callback) await callback(model);
-    helper.sendRes(res, httpStatus.OK, data);
+    if (!stop) helper.sendRes(res, httpStatus.OK, data);
   } else {
-    helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Invalid data");
+    if (!stop)
+      helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Invalid data");
   }
 };
 
@@ -60,18 +67,16 @@ methodHelper.deleteDocument = async (
   helper.sendRes(res, httpStatus.OK, rs);
 };
 
-methodHelper.deleteByuserID = async (res, Model, modelName, userID) => {
+methodHelper.deleteByuserID = async (Model, modelName, userID) => {
   const models = await Model.find({ userID: userID });
   if (models.length === 0) {
-    helper.sendRes(res, httpStatus.BAD_REQUEST, null, `${modelName} not found`);
+    throw new Error(`${modelName} not found`);
   }
 
   //delete all task first
-  models.forEach(async (model) => {
+  await models.forEach(async (model) => {
     await model.remove();
   });
-
-  res.status(200).json({ message: "Success" });
 };
 
 module.exports = methodHelper;

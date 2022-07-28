@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const httpStatus = require("http-status");
 const helper = require("../../helpers/helper");
 const methodHelper = require("../../helpers/methodHelper");
 const { Room } = require("../../models/systemModel");
@@ -7,14 +8,20 @@ const getRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find({ roomMaster: req.user._id }).populate(
     "reportIDs"
   );
-  res.status(200).json(rooms);
+  console.log(rooms);
+  helper.sendRes(res, httpStatus.OK, rooms);
 });
 
 const createRoom = asyncHandler(async (req, res) => {
   const { type, name, password, memberIDs, reportIDs } = req.body;
 
   if (!type || !name) {
-    helper.sendRes(res, 400, null, "Please include all fields");
+    helper.sendRes(
+      res,
+      httpStatus.BAD_REQUEST,
+      null,
+      "Please include all fields"
+    );
   }
 
   //check if room's name is same
@@ -22,7 +29,7 @@ const createRoom = asyncHandler(async (req, res) => {
     helper.sendRes(res, 400, null, "Room with same name is extis");
   }
 
-  methodHelper.createDocument(res, Room, {
+  await methodHelper.createDocument(res, Room, {
     type,
     name,
     password,
@@ -45,7 +52,7 @@ const deleteRoom = asyncHandler(async (req, res) => {
 
 //route api/rooms/:id
 const updateRoom = asyncHandler(async (req, res) => {
-  methodHelper.updateDocument(
+  await methodHelper.updateDocument(
     res,
     Room,
     "Room",
@@ -55,16 +62,9 @@ const updateRoom = asyncHandler(async (req, res) => {
   );
 });
 
-const deleteRoomByuserID = asyncHandler(
-  async (req, res, userID = "62cbf741d3e3f7707a52e158") => {
-    await methodHelper.deleteByuserID(res, Room, "Room", userID);
-  }
-);
-
 module.exports = {
   createRoom,
   deleteRoom,
   updateRoom,
   getRooms,
-  deleteRoomByuserID,
 };

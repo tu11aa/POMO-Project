@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const scheduleSchema = mongoose.Schema(
   {
     userID: {
-      type: mongoose.Schema.Types.ObjectID,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -20,12 +20,12 @@ const scheduleSchema = mongoose.Schema(
 const taskSchema = mongoose.Schema(
   {
     userID: {
-      type: mongoose.Schema.Types.ObjectID,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     scheduleID: {
-      type: mongoose.Schema.Types.ObjectID,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Schedule",
       required: true,
     },
@@ -95,7 +95,7 @@ const roomSchema = mongoose.Schema(
 const reportSchema = mongoose.Schema(
   {
     userID: {
-      type: mongoose.Schema.Types.ObjectID,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
