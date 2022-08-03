@@ -69,7 +69,15 @@ const createReport = asyncHandler(async (req, res) => {
   );
 });
 
-const deleteReport = async (req, res) => {
+const getReports = asyncHandler(async (req, res) => {
+  const reports = await Report.find({ userID: req.query.userID });
+  if (reports === [])
+    helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Report not found");
+
+  return helper.sendRes(res, httpStatus.OK, reports);
+});
+
+const deleteReport = asyncHandler(async (req, res) => {
   await methodHelper.deleteDocument(
     res,
     Report,
@@ -77,6 +85,6 @@ const deleteReport = async (req, res) => {
     req.params.reportID,
     async (task) => await task.reporter.equals(req.user._id)
   );
-};
+});
 
-module.exports = { createReport, deleteReport };
+module.exports = { createReport, deleteReport, getReports };
