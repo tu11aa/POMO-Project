@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import { FaUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
@@ -8,13 +9,13 @@ import Spinner from '../components/Spinner'
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     password2: '',
   })
 
-  const { name, email, password, password2 } = formData
+  const { username, email, password, password2 } = formData
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ function Register() {
       navigate('/')
     }
 
-    // dispatch(reset())
+    dispatch(reset())
   }, [isError, isSuccess, user, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -47,10 +48,12 @@ function Register() {
     e.preventDefault()
 
     if (password !== password2) {
-      toast.error('Passwords do not match')
+      toast.error('Passwords do not match', {
+        position: toast.POSITION.TOP_RIGHT
+      })
     } else {
       const userData = {
-        name,
+        username,
         email,
         password,
       }
@@ -73,14 +76,15 @@ function Register() {
       </section>
 
       <section className='form'>
+        <ToastContainer autoClose={3000}  />
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
               type='text'
               className='form-control'
-              id='name'
-              name='name'
-              value={name}
+              id='username'
+              name='username'
+              value={username}
               onChange={onChange}
               placeholder='Enter your name'
               required
