@@ -13,7 +13,7 @@ export default function About() {
             <p className="font13">
               This is a school project belongs to Group 8
               <br />
-              With the help of Mr.HO Tuan Thanh, we are building a website for learning and providing people with a product that brings Pomodoro more interesting and easy.
+              With the help of Mr.HO Tuan Thanh, we are willing to build a website for learning and providing people with a product that makes Pomodoro more interesting and easy.
             </p>
           </HeaderInfo>
           <TablesWrapper className="flexSpaceNull">
@@ -54,9 +54,7 @@ const Wrapper = styled.section`
 `;
 const HeaderInfo = styled.div`
   margin-bottom: 50px;
-  @media (max-width: 860px) {
-    text-align: center;
-  }
+  text-align: left;
 `;
 const TablesWrapper = styled.div`
   @media (max-width: 860px) {

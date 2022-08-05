@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { FaUser } from 'react-icons/fa'
+// import { FaUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import styled from "styled-components";
+
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -69,13 +71,16 @@ function Register() {
 
   return (
     <>
+    <LoginBox>
       <section className='heading'>
-        <h1>
-          <FaUser /> Register
-        </h1>
-        <p>Please create an account</p>
+        <Heading>
+          <h1>
+            Register Page
+          </h1>
+          <Heading2>Sign up now to be a member of Pomodoro !</Heading2>
+        </Heading>
       </section>
-
+      
       <section className='form'>
         <ToastContainer autoClose={3000}  />
         <form onSubmit={onSubmit}>
@@ -140,12 +145,24 @@ function Register() {
             />
           </div>
           <div className='form-group'>
-            <button className='btn btn-block'>Submit</button>
+            <button className='btn btn-block'>Sign Up</button>
           </div>
         </form>
       </section>
+    </LoginBox>
+      
     </>
   )
 }
 
 export default Register
+
+const LoginBox = styled.div`
+  margin-top: 70px;
+`;
+const Heading = styled.div`
+  color: #a92323
+`
+const Heading2 = styled.div`
+  color: #824646
+`

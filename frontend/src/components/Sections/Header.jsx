@@ -11,7 +11,7 @@ export default function Header() {
     <Wrapper id="home" className="container flexSpaceCenter">
       <LeftSide className="flexCenter">
         <div>
-          <h1 className="extraBold font60">Pomodoro Techniques</h1>
+          <MainHeader className="extraBold font60">Pomodoro Techniques</MainHeader>
           <HeaderP className="font13 semiBold">
           The Pomodoro Technique is a time management method developed in the late 1980s. It uses a timer to break work into intervals, typically 25 minutes in length, separated by short breaks.
           </HeaderP>
@@ -72,9 +72,10 @@ const HeaderP = styled.div`
   max-width: 470px;
   padding: 15px 0 50px 0;
   line-height: 1.5rem;
+  text-align: left;
   @media (max-width: 960px) {
     padding: 15px 0 50px 0;
-    text-align: center;
+    text-align: left;
     max-width: 100%;
   }
 `;
@@ -122,4 +123,8 @@ const ButtonsRow = styled.div`
   @media (max-width: 860px) {
     justify-content: space-between;
   }
+`;
+
+const MainHeader = styled.div`
+  text-align: left;
 `;

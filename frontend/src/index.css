@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 * {
   margin: 0;
@@ -140,7 +140,7 @@ h3 {
   padding: 10px 20px;
   border: 1px solid #000;
   border-radius: 5px;
-  background: #000;
+  background: #a92323;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -403,7 +403,7 @@ footer {
   .heading p {
     font-size: 1.5rem;
   }
-} */
+}
 
 
 

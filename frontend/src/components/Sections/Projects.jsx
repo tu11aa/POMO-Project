@@ -56,7 +56,5 @@ const Wrapper = styled.section`
   width: 100%;
 `;
 const HeaderInfo = styled.div`
-  @media (max-width: 860px) {
-    text-align: center;
-  }
+  text-align: left;
 `;

@@ -1,10 +1,11 @@
 import {useState, useEffect} from 'react'
 import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
-import {FaSignInAlt} from 'react-icons/fa'
+// import {FaSignInAlt} from 'react-icons/fa'
 import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import styled from "styled-components";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -56,11 +57,14 @@ function Login() {
 
     return (
       <>
+      <LoginBox>
         <section className="heading">
+        <Heading>
           <h1>
-            <FaSignInAlt /> Sign in 
+            Sign In Page
           </h1>
-          <p>Sign in for more features!</p>
+          <Heading2>Sign in for more features</Heading2>
+        </Heading>
         </section>
 
         <section className="form">
@@ -94,7 +98,20 @@ function Login() {
             </div>
           </form>
         </section>
+      </LoginBox>
+        
       </>
     )
   }
   export default Login
+
+
+const LoginBox = styled.div`
+  margin-top: 70px;
+`;
+const Heading = styled.div`
+  color: #a92323
+`
+const Heading2 = styled.div`
+  color: #824646
+`

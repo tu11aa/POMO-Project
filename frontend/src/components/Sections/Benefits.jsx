@@ -70,7 +70,5 @@ const ServiceBoxWrapper = styled.div`
   }
 `;
 const HeaderInfo = styled.div`
-  @media (max-width: 860px) {
-    text-align: center;
-  }
+  text-align: left;
 `;
