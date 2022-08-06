@@ -5,7 +5,7 @@ const TodoForm = () => {
         <>
         <Wrapper>
         <Form>
-            <input type="text" id="fname" name="fname" className="font20 extraBold" />
+            <input type="text" placeholder="Enter your task here" id="fname" name="fname" className="font20 extraBold" />
         </Form>
         
         <AddButton type="submit" value="Add Task" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
