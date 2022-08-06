@@ -56,6 +56,7 @@ function Register() {
       })
     } else {
       const userData = {
+        fullname,
         username,
         email,
         password,
@@ -148,6 +149,7 @@ function Register() {
             <button className='btn btn-block'>Sign Up</button>
           </div>
         </form>
+        <button className="btn btn-block" onClick={() => navigate('/')}>Home</button>
       </section>
     </LoginBox>
       

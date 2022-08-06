@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
-import {toast} from 'react-toastify'
+import {ToastContainer ,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from 'react-router-dom'
 // import {FaSignInAlt} from 'react-icons/fa'
 import {useSelector, useDispatch} from 'react-redux'
@@ -68,6 +69,7 @@ function Login() {
         </section>
 
         <section className="form">
+          <ToastContainer autoClose={3000}  />
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <input 
@@ -97,6 +99,8 @@ function Login() {
               <button className="btn btn-block">Submit</button>
             </div>
           </form>
+        <button className="btn btn-block" onClick={() => navigate('/')}>Home</button>
+        <button className="btn btn-block" onClick={() => navigate('/register')}>Sign up</button>
         </section>
       </LoginBox>
         

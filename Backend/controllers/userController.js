@@ -65,6 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
         email: user.email,
         token: authHelper.generateToken(user._id, "30d"),
       };
+
       helper.sendRes(res, httpStatus.OK, data);
     } else {
       helper.sendRes(res, httpStatus.UNAUTHORIZED, null, "Wrong password");
