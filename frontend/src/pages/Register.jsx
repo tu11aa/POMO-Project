@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-// import { FaUser } from 'react-icons/fa'
+import HomeButton from "../components/Nav/HomeButton";
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
@@ -72,13 +72,14 @@ function Register() {
 
   return (
     <>
+    <HomeButton />
     <LoginBox>
       <section className='heading'>
         <Heading>
           <h1>
-            Register Page
+            Sign Up Page
           </h1>
-          <Heading2>Sign up now to be a member of Pomodoro !</Heading2>
+          <Heading2>Sign up now to be a member of Pomodoro!</Heading2>
         </Heading>
       </section>
       
@@ -149,7 +150,7 @@ function Register() {
             <button className='btn btn-block'>Sign Up</button>
           </div>
         </form>
-        <button className="btn btn-block" onClick={() => navigate('/')}>Home</button>
+        <p>Already have an account? <Link to="/login" >Sign in</Link> </p>
       </section>
     </LoginBox>
       

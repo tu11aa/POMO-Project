@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react'
 import {ToastContainer ,toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import {useNavigate} from 'react-router-dom'
-// import {FaSignInAlt} from 'react-icons/fa'
+import {useNavigate, Link} from 'react-router-dom'
+import HomeButton from "../components/Nav/HomeButton";
 import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 import styled from "styled-components";
+
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -58,6 +59,7 @@ function Login() {
 
     return (
       <>
+      <HomeButton />
       <LoginBox>
         <section className="heading">
         <Heading>
@@ -99,8 +101,7 @@ function Login() {
               <button className="btn btn-block">Submit</button>
             </div>
           </form>
-        <button className="btn btn-block" onClick={() => navigate('/')}>Home</button>
-        <button className="btn btn-block" onClick={() => navigate('/register')}>Sign up</button>
+        <p>Haven't got an account? <Link to="/register" >Sign up</Link> </p>
         </section>
       </LoginBox>
         
