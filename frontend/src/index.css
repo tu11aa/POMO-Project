@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
 }
 
@@ -405,25 +405,87 @@ footer {
   }
 }
 
-
-
-
-
-
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -431,19 +493,32 @@ time, mark, audio, video {
   box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
   content: none;
 }
 table {
@@ -451,21 +526,21 @@ table {
   border-spacing: 0;
 }
 a {
-  text-decoration: none!important;
-  color: #0B093B;
+  text-decoration: none !important;
+  color: #0b093b;
 }
 a:hover {
   color: #a92323;
 }
 input:-webkit-autofill {
-  -webkit-box-shadow:0 0 0 50px #fff inset; /* Change the color to your own background color */
+  -webkit-box-shadow: 0 0 0 50px #fff inset; /* Change the color to your own background color */
   box-shadow: transparent;
   -webkit-text-fill-color: #fff;
 }
 body {
   background: #fff;
-  color: #0B093B;
-  font-family: 'Khula', sans-serif;
+  color: #0b093b;
+  font-family: "Khula", sans-serif;
   overflow-x: hidden;
   font-size: 16px;
   font-weight: 400;
@@ -482,18 +557,18 @@ body {
   }
 }
 .regular {
-  font-weight: 400!important;
+  font-weight: 400 !important;
 }
 .semiBold {
-  font-weight: 600!important;
+  font-weight: 600 !important;
 }
 .extraBold {
-  font-weight: 800!important;
+  font-weight: 800 !important;
 }
 
 /* HELLPERS */
 .textCenter {
-  text-align: center
+  text-align: center;
 }
 .animate {
   transition: 0.3s ease;
@@ -525,9 +600,9 @@ body {
   margin: 10px 0;
 }
 .shadow {
-  box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
-  -webkit-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
-  -moz-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5)  ; 
+  box-shadow: 0 0 11px rgba(237, 232, 237, 0.5);
+  -webkit-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5);
+  -moz-box-shadow: 0 0 11px rgba(237, 232, 237, 0.5);
 }
 /* FLEXBOX */
 .flex {
@@ -634,22 +709,22 @@ body {
 }
 /* COLORS */
 .darkColor {
-  color: #0B093B;
+  color: #0b093b;
 }
 .purpleColor {
   color: #be4747;
 }
 .orangeColor {
-  color: #F2B300;
+  color: #f2b300;
 }
 .lightColor {
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 .coralColor {
-  color: #C4FFFF;
+  color: #c4ffff;
 }
 .greenColor {
-  color: #49CB86;
+  color: #49cb86;
 }
 .greyColor {
   color: #707070;
@@ -659,22 +734,22 @@ body {
 }
 /* BACKGROUNDS */
 .darkBg {
-  background-color: #0B093B;
+  background-color: #0b093b;
 }
 .purpleBg {
   background-color: #be4747;
 }
 .orangeBg {
-  background-color: #F2B300;
+  background-color: #f2b300;
 }
 .lightBg {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 .coralBg {
-  background-color: #C4FFFF;
+  background-color: #c4ffff;
 }
 .greenBg {
-  background-color: #49CB86;
+  background-color: #49cb86;
 }
 .greyBg {
   background-color: #707070;

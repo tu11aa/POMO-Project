@@ -3,11 +3,14 @@ const TodoForm = () => {
 
 	return (
         <>
+        <Wrapper>
         <Form>
-            <label className="font13">Add a task</label>
             <input type="text" id="fname" name="fname" className="font20 extraBold" />
         </Form>
-        <AddButton type="submit" value="Add Task" className="pointer animate radius8" style={{ maxWidth: "220px" }} />
+        
+        <AddButton type="submit" value="Add Task" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
+        </Wrapper>
+        
         </>
         
 	);
@@ -15,40 +18,37 @@ const TodoForm = () => {
 
 export default TodoForm;
 
+const Wrapper=styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0 auto
+`
+
 const Form = styled.form`
 
-  text-align: left;
-  padding: 70px 0 30px 0;
-  input,
-  textarea {
+display: flex;
+    justify-content: space-between;
+    text-align: left;
+    input{
+        width: 95%;  
+    };
     margin-top: 10px;
-    width: 100%;
+    width:100%;
+    margin: 0 auto;
     background-color: transparent;
-    border: 0px;
-    outline: 1px solid #000000;
     box-shadow: none;
-    height: 70px;
-  }
-  textarea {
-    min-height: 100px;
-  }
-  @media (max-width: 50px) {
-    padding: 30px 0;
-  }
+    height: 50px;
 `;
 const AddButton = styled.input`
-  border: 1px solid #7620ff;
-  background-color: #7620ff;
-  width: 100%;
-  padding: 15px;
+  background-color: #1f1f1f;
+  width: 20%;
   outline: none;
   color: #fff;
+  font-size: large;
   :hover {
-    background-color: #580cd2;
-    border: 1px solid #7620ff;
+    background-color: #282828;
     color: #fff;
   }
-  @media (max-width: 991px) {
-    margin: 0 auto;
-  }
+  font-family: "Lucida Console", "Courier New", monospace;
 `;
