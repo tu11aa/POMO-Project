@@ -12,6 +12,7 @@
   "author": "Tu1a",
   "license": "MIT",
   "dependencies": {
+    "antd": "^4.22.3",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^7.3.0",
