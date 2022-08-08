@@ -3,16 +3,16 @@ import styled from "styled-components";
 // Sections
 import TaskList from "../components/Sections/TaskList";
 import Timer from "../components/Sections/Timer";
-import TimerButton from "../components/Sections/TimerButton";
+// import TimerButton from "../components/Sections/TimerButton";
 import TimerSettings from "../components/Sections/TimerSettings";
 export default function PomoMode() {
   return (
     <BgHome>
       <div className="container">
         <Timer />
-        <TimerSettings />
+        {/* <TimerSettings /> */}
         <br />
-        <TimerButton />
+        {/* <TimerButton /> */}
         <TaskList />
       </div>
     </BgHome>

@@ -4,7 +4,7 @@ import StartButton from '../Elements/StartButton'
 function TimerButton() {
   return (
     <div>
-        <StartButton/>
+        
     </div>
   )
 }

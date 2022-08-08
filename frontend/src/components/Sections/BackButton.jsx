@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-function StartButton(props) {
+function BackButton(props) {
   return (
     <>
-     <Button {...props} type="submit" value="START" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
+     <Button {...props} type="submit" value="BACK" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
     </>
   )
 }
 
-export default StartButton;
+export default BackButton;
 
 const Button = styled.input`
   background-color: #1f1f1f;
