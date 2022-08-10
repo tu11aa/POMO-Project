@@ -8,7 +8,7 @@ const TodoForm = () => {
             <input type="text" placeholder="Enter your task here" id="fname" name="fname" className="font20 extraBold" />
         </Form>
         
-        <AddButton type="submit" value="Add Task" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
+        <AddButton type="submit" value="Add" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
         </Wrapper>
         
         </>
@@ -42,10 +42,10 @@ display: flex;
 `;
 const AddButton = styled.input`
   background-color: #1f1f1f;
-  width: 20%;
+  width: 25%;
   outline: none;
   color: #fff;
-  font-size: large;
+  font-size: x-large;
   :hover {
     background-color: #282828;
     color: #fff;

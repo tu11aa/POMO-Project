@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import PomoMode from "./pages/PomoMode";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/pomomode" element={<PomoMode />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </>

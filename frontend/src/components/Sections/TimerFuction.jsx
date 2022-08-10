@@ -5,6 +5,7 @@ import PauseButton from '../Elements/PauseButton';
 import SettingsButton from '../Elements/SettingsButton';
 import {useContext, useState, useEffect, useRef} from "react";
 import SettingsContext from "./SettingsContext";
+import styled from 'styled-components';
 
 const red = '#f54e4e';
 const green = '#4aec8c';
@@ -74,6 +75,7 @@ function TimerFuction() {
         pathColor:mode === 'work' ? red : green,
         tailColor:'rgba(255,255,255,.2)',
       })} />
+      <Wrapper>
       <div style={{marginTop:'20px'}}>
         {isPaused
           ? <StartButton onClick={() => { setIsPaused(false); isPausedRef.current = false; }} />
@@ -82,8 +84,15 @@ function TimerFuction() {
       <div style={{marginTop:'20px'}}>
         <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
       </div>
+      </Wrapper>
     </div>
   );
 }
 
 export default TimerFuction
+
+const Wrapper=styled.div`
+    display: flex;
+    justify-content: space-between;
+    /* width: auto; */
+`

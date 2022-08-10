@@ -3,16 +3,14 @@ import styled from "styled-components";
 // Sections
 import TaskList from "../components/Sections/TaskList";
 import Timer from "../components/Sections/Timer";
-// import TimerButton from "../components/Sections/TimerButton";
-import TimerSettings from "../components/Sections/TimerSettings";
+import HomeButton from "../components/Nav/HomeButton";
 export default function PomoMode() {
   return (
     <BgHome>
+      <HomeButton/>
       <div className="container">
         <Timer />
-        {/* <TimerSettings /> */}
         <br />
-        {/* <TimerButton /> */}
         <TaskList />
       </div>
     </BgHome>
@@ -20,7 +18,9 @@ export default function PomoMode() {
 }
 
 const BgHome = styled.div`
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
+  width: auto;
+  height: auto;
   background: #f3d8d8;
 `;

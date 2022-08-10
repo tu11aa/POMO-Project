@@ -1,12 +1,13 @@
 import React from 'react'
 import TodoForm from '../Elements/TodoForm'
 import TodoList from '../Elements/TodoList'
+import styled from 'styled-components'
 function TaskList() {
   return (
     <>
-    <br/>
-    Task List
-    <br/>
+    <Title>
+      Task List
+    </Title>
     <br/>
     <TodoForm/>
     <TodoList/>
@@ -16,3 +17,8 @@ function TaskList() {
 }
 
 export default TaskList
+
+const Title=styled.div`
+  font-size: x-large;
+  font-family: "Lucida Console", "Courier New", monospace;
+`
