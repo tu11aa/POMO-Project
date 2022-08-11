@@ -13,9 +13,9 @@ methodHelper.createDocument = async (
   stop = null //stop because some funtion call sendRes in another step
 ) => {
   const model = await Model.create(data);
-  if (data) {
+  if (model) {
     if (callback) await callback(model);
-    if (!stop) helper.sendRes(res, httpStatus.OK, data);
+    if (!stop) helper.sendRes(res, httpStatus.OK, model);
   } else {
     if (!stop)
       helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Invalid data");
@@ -30,7 +30,7 @@ methodHelper.updateDocument = async (
   data,
   isAuthorized = null
 ) => {
-  let model = await Model.findById(id);
+  const model = await Model.findById(id);
   if (!model) {
     helper.sendRes(res, httpStatus.BAD_REQUEST, null, `${modelName} not found`);
   }
@@ -43,7 +43,7 @@ methodHelper.updateDocument = async (
     new: true,
   });
 
-  helper.sendRes = (res, httpStatus.OK, updatedModel);
+  helper.sendRes(res, httpStatus.OK, updatedModel);
 };
 
 methodHelper.deleteDocument = async (

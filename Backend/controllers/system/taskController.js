@@ -35,9 +35,10 @@ const updateTask = asyncHandler(async (req, res) => {
   await methodHelper.updateDocument(
     res,
     Task,
+    "Task",
     req.params.id,
     req.body,
-    async (task) => await task.userID.equals(userID)
+    async (task) => await task.userID.equals(req.user._id)
   );
 });
 
