@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteTask, reset } from "../../features/todolist/todoSlice";
+import { deleteTask, reset, updateTask } from "../../features/todolist/todoSlice";
 
 const TodoItem = ({ id, content, status }) => {
   const dispatch = useDispatch()
@@ -11,16 +11,12 @@ const TodoItem = ({ id, content, status }) => {
     dispatch(deleteTask(id))
   }
 
-  useEffect(()=>{
-    dispatch(reset())
-  }, [dispatch])
-
-  const onChangeHandler = (e) => {
+  const onChangeHandler = () => {
     if (status === "Done") {
-      status = "Doing"
+      dispatch(updateTask(id, {status : "Doing"}))
     }
     else {
-      status = "Done"
+      dispatch(updateTask(id, {status : "Done"}))
     }
   }
 

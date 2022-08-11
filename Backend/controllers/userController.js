@@ -43,7 +43,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (user) {
     data = {
       _id: user._id,
-      name: user.name,
+      username: user.username,
+      fullname: user.fullname,
       email: user.email,
       token: authHelper.generateToken(user._id, "30d"),
     };

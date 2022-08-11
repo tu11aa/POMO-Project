@@ -2,29 +2,35 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks, reset } from '../../features/todolist/todoSlice';
 import TodoItem from './TodoItem';
+import { ToastContainer, toast } from "react-toastify";
 
 const TodoList = () => {
 	const dispatch = useDispatch()
-
-	const {tasks, isSuccess} = useSelector((state) => state.todo)
-
+	
 	useEffect(() => {
-		return () => {
-		  if (isSuccess) {
-			dispatch(reset())
-		  }
-		}
-	  }, [dispatch, isSuccess])
-
-	  useEffect(() => {
+		console.log(tasks)
 		dispatch(getTasks())
-	  }, [dispatch])
+		dispatch(reset())
+	}, [])
+
+
+	const tasks = useSelector((state) => state.todo.tasks)
+
+	
+	// useEffect(() => {
+	// 	console.log("tasks")
+	// 	// dispatch(reset())
+	// }, [tasks])
 
 	return (
-		<ul className='list-group'>{tasks.map((task) => (
-			<TodoItem key={task._id} id={task.id} content={task.content} status={task.status} />
-		))}
-		</ul>
+		<>
+			<ToastContainer autoClose={3000} />
+			<ul className='list-group'>{
+				tasks.map((task) => (
+					<TodoItem key={task._id} id={task._id} content={task.content} status={task.status} />
+				))}
+			</ul>
+		</>
 	);
 };
 

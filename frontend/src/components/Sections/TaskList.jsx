@@ -2,17 +2,37 @@ import React from 'react'
 import TodoForm from '../Elements/TodoForm'
 import TodoList from '../Elements/TodoList'
 import styled from 'styled-components'
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from 'react';
+import { reset } from '../../features/todolist/todoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 function TaskList() {
+  const dispatch = useDispatch()
+
+  const { isError, isSuccess, message } = useSelector(
+    (state) => state.todo
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess){
+      dispatch(reset());
+    }
+  }, [isSuccess, isError, dispatch, message]);
+
   return (
     <>
-    <Title>
-      Task List
-    </Title>
-    <br/>
-    <TodoForm/>
-    <TodoList/>
-    {/* <TodoItem id='5' title='todo5' completed='true' /> */}
-    </>
+      <ToastContainer autoClose={3000} />
+      <Title>
+        Task List
+      </Title>
+      <br/>
+      <TodoForm/>
+      <TodoList/>
+      </>
   )
 }
 

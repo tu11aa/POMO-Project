@@ -44,10 +44,25 @@ const deleteTask = async (taskID, token) => {
   } else throw new Error(response.data.message);
 };
 
+const updateTask = async (taskID, update, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + "/" + taskID, update, config);
+
+  if (response.data.success) {
+    return response.data.data;
+  } else throw new Error(response.data.message);
+};
+
 const todoService = {
   addTask,
   getTasks,
   deleteTask,
+  updateTask,
 };
 
 export default todoService;

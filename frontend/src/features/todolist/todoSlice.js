@@ -63,6 +63,24 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
+export const updateTask = createAsyncThunk(
+  "todo/updateTask",
+  async (taskID, update, thunkAPI) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user")).token;
+      return await todoService.updateTask(taskID, update, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -114,6 +132,20 @@ export const todoSlice = createSlice({
         state.tasks = state.tasks.filter((task) => task._id !== action.payload);
       })
       .addCase(deleteTask.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      //updateTask
+      .addCase(updateTask.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.tasks = action.payload;
+      })
+      .addCase(updateTask.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
