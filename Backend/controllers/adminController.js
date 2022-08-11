@@ -3,6 +3,7 @@ const authHelper = require("../helpers/authHelper");
 const helper = require("../helpers/helper");
 const Admin = require("../models/adminModel");
 const httpStatus = require("http-status");
+const methodHelper = require("../helpers/methodHelper");
 
 const registerAdmin = asyncHandler(async (req, res) => {
   const { adminName, email, password, fullname, phone } = req.body;
@@ -80,4 +81,14 @@ const getMe = asyncHandler(async (req, res) => {
   helper.sendRes(res, httpStatus.OK, req.admin);
 });
 
-module.exports = { registerAdmin, loginAdmin, getMe };
+const deleteAdmin = asyncHandler(async (req, res) => {
+  methodHelper.deleteDocument(
+    res,
+    Admin,
+    "Admin",
+    req.params.id,
+    async (admin) => await admin._id.equals(req.admin._id)
+  );
+});
+
+module.exports = { registerAdmin, loginAdmin, getMe, deleteAdmin };

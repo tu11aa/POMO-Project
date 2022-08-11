@@ -6,9 +6,9 @@ const { Task, Schedule } = require("../../models/systemModel");
 
 //api/schedules/:scheduleID/tasks
 const createTask = asyncHandler(async (req, res) => {
-  const { scheduleID, content } = req.body;
+  const { content } = req.body;
   //need a user?
-  if (!content || !scheduleID) {
+  if (!content) {
     helper.sendRes(
       res,
       httpStatus.BAD_REQUEST,
@@ -19,11 +19,16 @@ const createTask = asyncHandler(async (req, res) => {
 
   await methodHelper.createDocument(res, Task, {
     userID: req.user._id,
-    scheduleID,
     content,
     time: Date.now(),
     status: "Todo",
   });
+});
+
+const getTasks = asyncHandler(async (req, res) => {
+  const tasks = await Task.find({ userID: req.user._id });
+
+  helper.sendRes(res, httpStatus.OK, tasks);
 });
 
 const updateTask = asyncHandler(async (req, res) => {
@@ -50,6 +55,10 @@ const deleteTaskbyuserID = asyncHandler(async (req, res, userID) => {
   await methodHelper.deleteByuserID(res, Task, "Task", userID);
 });
 
-const deleteTaskByScheduleID = asyncHandler(async (req, res) => {});
-
-module.exports = { createTask, updateTask, deleteTask, deleteTaskbyuserID };
+module.exports = {
+  createTask,
+  updateTask,
+  deleteTask,
+  deleteTaskbyuserID,
+  getTasks,
+};
