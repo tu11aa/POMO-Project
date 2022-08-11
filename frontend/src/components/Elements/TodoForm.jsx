@@ -39,6 +39,7 @@ display: flex;
     background-color: transparent;
     box-shadow: none;
     height: 50px;
+    
 `;
 const AddButton = styled.input`
   background-color: #1f1f1f;

@@ -20,5 +20,5 @@ export default TaskList
 
 const Title=styled.div`
   font-size: x-large;
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
