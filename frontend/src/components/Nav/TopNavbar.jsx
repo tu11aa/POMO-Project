@@ -62,13 +62,17 @@ export default function TopNavbar() {
             </li>
           </UlWrapper>
           
-          
           {user ? (
             <UlWrapperRight className="flexNullCenter">
-              <UlWrapper>{user.name}</UlWrapper>
-            <li className="semiBold font15 pointer">
+              hello 
+              <Link to='/profile'  style={{ padding: "10px 30px 10px 0" }}>
+              <UlWrapper>
+                , {user.username}
+              </UlWrapper>
+              </Link>
+            <li className="radius8 lightBg" style={{ padding: "10px 15px" }}>
             <button  onClick={onLogout}>
-               Sign Out
+               <Title>Sign Out</Title>
             </button>
           </li>
           </UlWrapperRight>
@@ -105,6 +109,10 @@ const Wrapper = styled.nav`
 const NavInner = styled.div`
   position: relative;
   height: 100%;
+`
+const Title=styled.div`
+font-size: medium;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `
 
 const UlWrapper = styled.ul`
