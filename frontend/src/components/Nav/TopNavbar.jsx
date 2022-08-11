@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
 // Assets
 import LogoIcon from "../../assets/svg/Logo";
 
@@ -17,6 +16,7 @@ export default function TopNavbar() {
     };
   }, [y]);
 
+
   return (
     <>
       <Wrapper
@@ -24,80 +24,66 @@ export default function TopNavbar() {
         style={y > 100 ? { height: "60px" } : { height: "80px" }}
       >
         <NavInner className="container flexSpaceCenter">
-          <Link className="pointer flexNullCenter" to="home" smooth={true}>
+          <Linker className="pointer flexNullCenter" to="home" smooth={true}>
             <LogoIcon />
             <h1 style={{ marginLeft: "15px" }} className="Abril Fatface">
               Pomodoro
             </h1>
-          </Link>
+          </Linker>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <Link
-                activeClass="active"
-                style={{ padding: "10px 15px" }}
-                to="home"
-                spy={true}
-                smooth={true}
-                offset={-80}
-              >
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
                 Home
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link
-                activeClass="active"
-                style={{ padding: "10px 15px" }}
-                to="services"
-                spy={true}
-                smooth={true}
-                offset={-80}
-              >
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
                 Benefits
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link
-                activeClass="active"
-                style={{ padding: "10px 15px" }}
-                to="projects"
-                spy={true}
-                smooth={true}
-                offset={-80}
-              >
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="projects" spy={true} smooth={true} offset={-80}>
                 Advantages
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link
-                activeClass="active"
-                style={{ padding: "10px 15px" }}
-                to="pricing"
-                spy={true}
-                smooth={true}
-                offset={-80}
-              >
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="pricing" spy={true} smooth={true} offset={-80}>
                 About Us
-              </Link>
+              </Linker>
             </li>
           </UlWrapper>
+          
+          {user ? (
+            <UlWrapperRight className="flexNullCenter">
+              hello 
+              <Link to='/profile'  style={{ padding: "10px 30px 10px 0" }}>
+              <UlWrapper>
+                , {user.username}
+              </UlWrapper>
+              </Link>
+            <li className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+            <button  onClick={onLogout}>
+               <Title>Sign Out</Title>
+            </button>
+          </li>
+          </UlWrapperRight>
+          ) : (
+          <>
           <UlWrapperRight className="flexNullCenter">
-            {name? <>
-            </>:<></>}
             <li className="semiBold font15 pointer">
               <a href="/register" style={{ padding: "10px 30px 10px 0" }}>
                 Sign Up
               </a>
             </li>
             <li className="semiBold font15 pointer flexCenter">
-              <a
-                href="/login"
-                className="radius8 lightBg"
-                style={{ padding: "10px 15px" }}
-              >
+              <a href="/login" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
                 Sign In
               </a>
             </li>
           </UlWrapperRight>
+          </>
+        )}
+             
         </NavInner>
       </Wrapper>
     </>
@@ -114,7 +100,7 @@ const Wrapper = styled.nav`
 const NavInner = styled.div`
   position: relative;
   height: 100%;
-`;
+`
 
 const UlWrapper = styled.ul`
   display: flex;

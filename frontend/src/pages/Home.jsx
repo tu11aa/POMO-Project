@@ -1,4 +1,4 @@
-import Timer from "../components/Sections/Timer";
+import Timer from "../components/Timer/Timer";
 
 function Home() {
   return (
