@@ -64,11 +64,14 @@ export default function TopNavbar() {
           
           
           {user ? (
+            <UlWrapperRight className="flexNullCenter">
+              <UlWrapper>{user.name}</UlWrapper>
             <li className="semiBold font15 pointer">
-            <button className='btn' onClick={onLogout}>
+            <button  onClick={onLogout}>
                Sign Out
             </button>
           </li>
+          </UlWrapperRight>
           ) : (
           <>
           <UlWrapperRight className="flexNullCenter">
@@ -76,17 +79,16 @@ export default function TopNavbar() {
             <Link to="/register" style={{ padding: "10px 30px 10px 0" }}>
             Sign Up
           </Link>
+          </li>
           <li className="semiBold font15 pointer flexCenter">
             <Link to="/login" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
             Sign In
             </Link>
             </li>
-        </li>
-        </UlWrapperRight>
-        </>
+          </UlWrapperRight>
+          </>
         )}
-            
-          
+             
         </NavInner>
       </Wrapper>
     </>
