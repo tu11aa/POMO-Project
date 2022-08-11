@@ -21,7 +21,7 @@ export default function TopNavbar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // const { user } = useSelector((state) => state.auth)
-  const user = localStorage.getItem("user")
+  const user = JSON.parse(localStorage.getItem("user"))
 
   const onLogout = () => {
     dispatch(logout())
