@@ -1,15 +1,13 @@
-import React from 'react';
-import UserInfo from '../components/Sections/UserInfo';
+import React from "react";
+import UserInfo from "../components/Sections/UserInfo";
 import HomeButton from "../components/Nav/HomeButton";
 function Profile() {
-  return(
+  return (
     <div>
-      <HomeButton/>
-      <UserInfo/>
+      <HomeButton />
+      <UserInfo />
     </div>
-    
-  )
+  );
 }
 
-export default Profile
-
+export default Profile;
