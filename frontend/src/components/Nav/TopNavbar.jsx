@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-scroll";
+import { Link as Linker } from "react-scroll";
+
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../../features/auth/authSlice'
 // Assets
 import LogoIcon from "../../assets/svg/Logo";
 
@@ -14,39 +18,56 @@ export default function TopNavbar() {
     };
   }, [y]);
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
 
   return (
     <>
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-          <Link className="pointer flexNullCenter" to="home" smooth={true}>
+          <Linker className="pointer flexNullCenter" to="home" smooth={true}>
             <LogoIcon />
             <h1 style={{ marginLeft: "15px" }} className="Abril Fatface" >
               Pomodoro
             </h1>
-          </Link>
+          </Linker>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
+              <Linker activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
                 Home
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
+              <Linker activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
                 Benefits
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="projects" spy={true} smooth={true} offset={-80}>
+              <Linker activeClass="active" style={{ padding: "10px 15px" }} to="projects" spy={true} smooth={true} offset={-80}>
                 Advantages
-              </Link>
+              </Linker>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="pricing" spy={true} smooth={true} offset={-80}>
+              <Linker activeClass="active" style={{ padding: "10px 15px" }} to="pricing" spy={true} smooth={true} offset={-80}>
                 About Us
-              </Link>
+              </Linker>
             </li>
           </UlWrapper>
+          {user ? (
+            <li>
+            <button className='btn' onClick={onLogout}>
+               Sign Out
+            </button>
+          </li>
+          ) : ('no')}
           <UlWrapperRight className="flexNullCenter">
             <li className="semiBold font15 pointer">
               <a href="/register" style={{ padding: "10px 30px 10px 0" }}>
