@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 // Sections
 import TaskList from "../components/Sections/TaskList";
-import Timer from "../components/Sections/Timer";
+import Timer from "../components/Timer/Timer";
 import HomeButton from "../components/Nav/HomeButton";
 export default function PomoMode() {
   return (

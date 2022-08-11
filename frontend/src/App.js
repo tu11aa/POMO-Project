@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import PomoMode from "./pages/PomoMode";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import ChatRoom from "./components/ChatRoom/index";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/pomomode" element={<PomoMode />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/chat" element={<ChatRoom/>}/>
         </Routes>
       </Router>
     </>
