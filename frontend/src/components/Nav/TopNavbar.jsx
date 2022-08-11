@@ -61,25 +61,32 @@ export default function TopNavbar() {
               </Linker>
             </li>
           </UlWrapper>
+          
+          
           {user ? (
-            <li>
+            <li className="semiBold font15 pointer">
             <button className='btn' onClick={onLogout}>
                Sign Out
             </button>
           </li>
-          ) : ('no')}
+          ) : (
+          <>
           <UlWrapperRight className="flexNullCenter">
-            <li className="semiBold font15 pointer">
-              <a href="/register" style={{ padding: "10px 30px 10px 0" }}>
-                Sign Up
-              </a>
+          <li className="semiBold font15 pointer">
+            <Link to="/register" style={{ padding: "10px 30px 10px 0" }}>
+            Sign Up
+          </Link>
+          <li className="semiBold font15 pointer flexCenter">
+            <Link to="/login" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
+            Sign In
+            </Link>
             </li>
-            <li className="semiBold font15 pointer flexCenter">
-              <a href="/login" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-                Sign In
-              </a>
-            </li>
-          </UlWrapperRight>
+        </li>
+        </UlWrapperRight>
+        </>
+        )}
+            
+          
         </NavInner>
       </Wrapper>
     </>
