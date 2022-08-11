@@ -1,18 +1,41 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { addTask, reset } from '../../features/todolist/todoSlice';
+import { ToastContainer, toast } from "react-toastify";
+
 const TodoForm = () => {
+  const dispatch = useDispatch()
+
+  const [content, setContent] = useState("")
+  const { tasks, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.todo
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess){
+      dispatch(reset());
+    }
+  }, [isSuccess, isError, dispatch]);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTask({content}))
+  }
 
 	return (
-        <>
         <Wrapper>
-        <Form>
-            <input type="text" placeholder="Enter your task here" id="fname" name="fname" className="font20 extraBold" />
-        </Form>
-        
-        <AddButton type="submit" value="Add" className="pointer animate radius8" style={{ maxWidth: "200px" }} />
+          <ToastContainer autoClose={3000} />
+          <Form>
+              <input type="text" placeholder="Enter your task here" value={content} onChange={(e)=>setContent(e.target.value)} id="fname" name="fname" className="font20 extraBold" />
+          </Form>
+          
+          <AddButton type="submit" value="Add" onClick={handleSubmit} className="pointer animate radius8" style={{ maxWidth: "200px" } } />
         </Wrapper>
-        
-        </>
-        
 	);
 };
 

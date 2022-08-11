@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 
-const scheduleSchema = mongoose.Schema(
-  {
-    userID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    date: {
-      type: Date,
-      required: [true, "Please add a date"],
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+// const scheduleSchema = mongoose.Schema(
+//   {
+//     userID: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "User",
+//       required: true,
+//     },
+//     date: {
+//       type: Date,
+//       required: [true, "Please add a date"],
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
 
 const taskSchema = mongoose.Schema(
   {
@@ -24,11 +24,11 @@ const taskSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    scheduleID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Schedule",
-      required: true,
-    },
+    // scheduleID: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Schedule",
+    //   required: true,
+    // },
     content: {
       type: String,
       required: [true, "Please add a task"],
@@ -156,11 +156,11 @@ const removeduserSchema = mongoose.Schema(
   }
 );
 
-const Schedule = mongoose.model("Schedule", scheduleSchema);
+// const Schedule = mongoose.model("Schedule", scheduleSchema);
 const Task = mongoose.model("Task", taskSchema);
 const Room = mongoose.model("Room", roomSchema);
 const Report = mongoose.model("Reported User", reportSchema);
 const Blacklist = mongoose.model("Blacklist", blacklistSchema);
 const RemovedUser = mongoose.model("Removed User", removeduserSchema);
 
-module.exports = { Schedule, Task, Room, Report, Blacklist, RemovedUser };
+module.exports = { Task, Room, Report, Blacklist, RemovedUser };

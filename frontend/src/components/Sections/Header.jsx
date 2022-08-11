@@ -5,8 +5,11 @@ import FullButton from "../Buttons/FullButton";
 // Assets
 import HeaderImage from "../../assets/img/header-img.webp";
 import Dots from "../../assets/svg/Dots";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate()
+
   return (
     <Wrapper id="home" className="container flexSpaceCenter">
       <LeftSide className="flexCenter">
@@ -17,7 +20,7 @@ export default function Header() {
           </HeaderP>
           <ButtonsRow className="flexNullCenter" style={{ margin: "30px 0" }}>
                 <div style={{ width: "190px" }}>
-                  <FullButton title="START POMO MODE" action={() => alert("clicked")} />
+                  <FullButton title="START POMO MODE" action={() => navigate("/pomomode")} />
                 </div>
                 <div style={{ width: "190px", marginLeft: "15px" }}>
                   <FullButton title="SOCIAL MODE" action={() => alert("clicked")} border />

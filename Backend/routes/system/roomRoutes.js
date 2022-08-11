@@ -9,7 +9,7 @@ const {
 const { protect, protectAdmin } = require("../../middlewares/authMiddelware");
 const router = express.Router();
 
-router.use("/:roomID/tasks", require("./taskRoutes"));
+// router.use("/:roomID/tasks", require("./taskRoutes"));
 
 router.route("/:id").delete(protect, deleteRoom).put(protect, updateRoom);
 

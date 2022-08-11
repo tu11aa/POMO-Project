@@ -10,7 +10,7 @@ methodHelper.createDocument = async (
   Model,
   data,
   callback = null,
-  stop = null
+  stop = null //stop because some funtion call sendRes in another step
 ) => {
   const model = await Model.create(data);
   if (data) {

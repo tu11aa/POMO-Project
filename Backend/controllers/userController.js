@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const httpStatus = require("http-status");
 const authHelper = require("../helpers/authHelper");
 const helper = require("../helpers/helper");
+const methodHelper = require("../helpers/methodHelper");
 const { User } = require("../models/userModels");
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -90,4 +91,24 @@ const getUser = asyncHandler(async (req, res) => {
   helper.sendRes(res, httpStatus.OK, user);
 });
 
-module.exports = { registerUser, loginUser, getMe, getUser };
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find().select("-password");
+  if (users === []) {
+    helper.sendRes(res, httpStatus.UNAUTHORIZED, null, "User not found");
+  }
+
+  helper.sendRes(res, httpStatus.OK, users);
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  methodHelper.deleteDocument(req, User, "User", req.params.id);
+});
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getMe,
+  getUser,
+  deleteUser,
+  getUsers,
+};

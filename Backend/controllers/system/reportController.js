@@ -83,7 +83,17 @@ const deleteReport = asyncHandler(async (req, res) => {
     Report,
     "Report",
     req.params.reportID,
-    async (task) => await task.reporter.equals(req.user._id)
+    async (report) => {
+      const blacklist = await Blacklist.findOne({ userID: report.userIDs });
+      if (blacklist)
+        blacklist.reportIDs = helper.deleteItemInArray(
+          blacklist.reportIDs,
+          report.userID
+        );
+      blacklist.save();
+
+      await report.reporter.equals(req.user._id);
+    }
   );
 });
 
