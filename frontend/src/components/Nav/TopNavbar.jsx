@@ -20,11 +20,13 @@ export default function TopNavbar() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.auth)
+  // const { user } = useSelector((state) => state.auth)
+  const user = localStorage.getItem("user")
 
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
+    localStorage.removeItem("user")
     navigate('/')
   }
 
