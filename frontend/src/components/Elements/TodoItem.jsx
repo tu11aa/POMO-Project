@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { deleteTask, reset } from "../../features/todolist/todoSlice";
 
-const TodoItem = ({ id, title, completed }) => {
+const TodoItem = ({ id, content, status }) => {
+  const dispatch = useDispatch()
+
+  const handleOnclick = (e) => {
+    e.preventDefault();
+    dispatch(deleteTask(id))
+  }
+
+  useEffect(()=>{
+    dispatch(reset())
+  }, [dispatch])
+
+  const onChangeHandler = (e) => {
+    if (status === "Done") {
+      status = "Doing"
+    }
+    else {
+      status = "Done"
+    }
+  }
+
   return (
     <Item>
       <div>
-        <input type="checkbox" className="mr-3" checked={completed}></input>
-        {title}
+        <input type="checkbox" onChange={onChangeHandler} className="mr-3" checked={status === "Done"}></input>
+        {content}
       </div>
-      <btn className="btn btn-danger"> Delete </btn>
+      <button className="btn btn-danger" onClick={handleOnclick}> Delete </button>
     </Item>
   );
 };

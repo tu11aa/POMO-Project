@@ -8,7 +8,7 @@ const TodoForm = () => {
   const dispatch = useDispatch()
 
   const [content, setContent] = useState("")
-  const { tasks, isLoading, isError, isSuccess, message } = useSelector(
+  const { isError, isSuccess, message } = useSelector(
     (state) => state.todo
   );
 
@@ -19,7 +19,7 @@ const TodoForm = () => {
     if (isSuccess){
       dispatch(reset());
     }
-  }, [isSuccess, isError, dispatch]);
+  }, [isSuccess, isError, dispatch, message]);
 
 
   const handleSubmit = (e) => {
