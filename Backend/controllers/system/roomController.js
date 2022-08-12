@@ -8,7 +8,7 @@ const getRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find({ roomMaster: req.user._id }).populate(
     "reportIDs"
   );
-  console.log(rooms);
+
   helper.sendRes(res, httpStatus.OK, rooms);
 });
 
