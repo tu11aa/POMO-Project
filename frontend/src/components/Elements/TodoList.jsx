@@ -4,17 +4,17 @@ import { getTasks } from '../../features/todolist/todoSlice';
 import TodoItem from './TodoItem';
 
 const TodoList = () => {
-	const dispatch = useDispatch()
-
-	const tasks = useSelector((state) => state.todo.tasks)
+	const dispatch = useDispatch();
 	
 	useEffect(() => {
 		dispatch(getTasks())
-	}, [dispatch])
+	}, [dispatch]);
+
+	const {tasks} = useSelector((state) => state.todo);
 
 	return (
 		<ul className='list-group'>
-			{tasks.map((task) => <TodoItem key={task._id} id={task._id} content={task.content} status={task.status} />)}
+			{tasks.map((task, index) => <TodoItem key={task._id} index = {index} id={task._id} content={task.content} status={task.status} />)}
 		</ul>
 	);
 };

@@ -44,17 +44,21 @@ const deleteTask = async (taskID, token) => {
   } else throw new Error(response.data.message);
 };
 
-const updateTask = async (taskID, update, token) => {
+const updateTask = async (update, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.put(API_URL + "/" + taskID, update, config);
+  const response = await axios.put(
+    API_URL + "/" + update.taskID,
+    update.data,
+    config
+  );
 
   if (response.data.success) {
-    return response.data.data;
+    return { data: response.data.data, index: update.index };
   } else throw new Error(response.data.message);
 };
 

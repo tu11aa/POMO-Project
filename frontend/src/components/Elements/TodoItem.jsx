@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { deleteTask,  updateTask } from "../../features/todolist/todoSlice";
 
-const TodoItem = ({ id, content, status }) => {
+const TodoItem = ({ index, id, content, status }) => {
   const dispatch = useDispatch()
 
   const handleOnclick = (e) => {
@@ -14,10 +14,10 @@ const TodoItem = ({ id, content, status }) => {
   const onChangeHandler = (e) => {
     e.preventDefault();
     if (status === "Done") {
-      dispatch(updateTask({taskID : id, data : {status : "Doing"}}))
+      dispatch(updateTask({index : index, taskID : id, data : {status : "Doing"}}))
     }
     else {
-      dispatch(updateTask({taskID : id, data : {status : "Done"}}))
+      dispatch(updateTask({index : index, taskID : id, data : {status : "Done"}}))
     }
   }
 

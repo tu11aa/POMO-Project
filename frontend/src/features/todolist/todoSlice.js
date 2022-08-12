@@ -68,7 +68,7 @@ export const updateTask = createAsyncThunk(
   async (update, thunkAPI) => {
     try {
       const token = JSON.parse(localStorage.getItem("user")).token;
-      return await todoService.updateTask(update.taskID, update.data, token);
+      return await todoService.updateTask(update, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -143,10 +143,11 @@ export const todoSlice = createSlice({
       .addCase(updateTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.tasks.forEach((task) => {
-          if (task._id === action.payload._id)
-            task.status = action.payload.status;
-        });
+        // state.tasks.forEach((task) => {
+        //   if (task._id === action.payload._id)
+        //     task.status = action.payload.status;
+        // });
+        state.tasks[action.payload.index].status = action.payload.data.status;
       })
       .addCase(updateTask.rejected, (state, action) => {
         state.isLoading = false;
