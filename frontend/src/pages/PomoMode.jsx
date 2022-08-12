@@ -8,7 +8,7 @@ export default function PomoMode() {
   return (
     <BgHome>
       <HomeButton />
-      <div className="container" style ={{height: "auto"}}>
+      <div className="container" style={{ height: "100vh" }}>
         <Timer />
         <br />
         <TaskList />
@@ -18,13 +18,15 @@ export default function PomoMode() {
 }
 
 const BgHome = styled.div`
-  /* width: 100vw;
-  height: 100vh; */
-  width: auto;
-  
-  /* background: #f3d8d8; */
+  width: 100%;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
-  background: rgb(255,226,226);
-  background: linear-gradient(90deg, rgba(255,226,226,1) 0%, rgba(177,168,255,1) 100%, rgba(228,185,255,1) 100%);
+  background: rgb(255, 226, 226);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 226, 226, 1) 0%,
+    rgba(177, 168, 255, 1) 100%,
+    rgba(228, 185, 255, 1) 100%
+  );
 `;
