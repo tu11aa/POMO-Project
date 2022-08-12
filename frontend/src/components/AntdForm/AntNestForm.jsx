@@ -1,5 +1,8 @@
-import React from "react";
+//import React from "react";
 import { Button, DatePicker, Form, Input, InputNumber } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../features/auth/authSlice";
 const layout = {
   labelCol: {
     span: 3,
@@ -22,17 +25,30 @@ const validateMessages = {
 };
 
 function AntNestForm({ user, isDisable }) {
-  console.log("user: ", user);
-  // {
-  //     "_id": "62f4ab24efd23b7c7ac0ce08",
-  //     "username": "entiempi",
-  //     "email": "maiphuong5702@gmail.com",
-  //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjRhYjI0ZWZkMjNiN2M3YWMwY2UwOCIsImlhdCI6MTY2MDIyNzEyMCwiZXhwIjoxNjYyODE5MTIwfQ.S7ZrTOfnqORJYiau4qcfDPuoGb6h5lBXWUXu-7aI4vQ"
-  // }
+  const dispatch = useDispatch()
+
+  const [fullname, setFullname] = useState(JSON.parse(localStorage.getItem("user")).fullname)
+  const [nickname, setNickname] = useState(JSON.parse(localStorage.getItem("user")).nickname)
+  const [birthday, setBirthday] = useState(JSON.parse(localStorage.getItem("user")).dob)
+  const [gender, setGender] = useState(JSON.parse(localStorage.getItem("user")).gender)
+  const [bio, setBio] = useState(JSON.parse(localStorage.getItem("user")).bio)
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    
+      dispatch(updateUser({ userID : JSON.parse(localStorage.getItem("user"))._id, data : {
+        fullname,
+        nickname,
+        dob : birthday,
+        gender,
+        bio
+      }}))
+  }
 
   const onFinish = (values) => {
     console.log(values);
   };
+
   return (
     <Form
       {...layout}
@@ -44,13 +60,14 @@ function AntNestForm({ user, isDisable }) {
       <Form.Item
         name="username"
         label="Username"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+      //   rules={[
+      //     {
+      //       required: true,
+      //     },
+      //   ]
+      // }
       >
-        <Input />
+        <Input disabled="disabled"/>
       </Form.Item>
       <Form.Item
         name="fullname"
@@ -61,7 +78,7 @@ function AntNestForm({ user, isDisable }) {
           },
         ]}
       >
-        <Input />
+        <Input value={fullname} onChange={(e)=>setFullname(e.target.values)}/>
       </Form.Item>
       <Form.Item
         name="nickname"
@@ -84,7 +101,7 @@ function AntNestForm({ user, isDisable }) {
           },
         ]}
       >
-        <Input />
+        <Input disabled="disable" />
       </Form.Item>
       <Form.Item name="birthday" label="Birthday">
         <DatePicker />
@@ -94,7 +111,7 @@ function AntNestForm({ user, isDisable }) {
       </Form.Item>
 
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={onSubmit}>
           Submit
         </Button>
       </Form.Item>
