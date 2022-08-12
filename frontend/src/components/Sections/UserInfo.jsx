@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import AntNestForm from "../AntdForm/AntNestForm";
-import { useDispatch } from "react-redux";
 
 function UserInfo() {
   const user = JSON.parse(localStorage.getItem("user"));
-
-  const dispatch = useDispatch()
   
   const handleUpdate = (e) => {
-    setDisable(disable==true?false:true)
+    setDisable(disable===true?false:true)
   }
   
   const [disable, setDisable] = useState(false);

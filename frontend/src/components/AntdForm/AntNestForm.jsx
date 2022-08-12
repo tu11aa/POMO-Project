@@ -1,8 +1,10 @@
 //import React from "react";
-import { Button, DatePicker, Form, Input, InputNumber } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button, DatePicker, Form, Input } from "antd";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../features/auth/authSlice";
+import moment from 'moment';
+import { ToastContainer, toast } from "react-toastify";
 const layout = {
   labelCol: {
     span: 3,
@@ -43,6 +45,7 @@ function AntNestForm({ user, isDisable }) {
         gender,
         bio
       }}))
+      toast.success("Update profile success!");
   }
 
   const onFinish = (values) => {
@@ -57,6 +60,7 @@ function AntNestForm({ user, isDisable }) {
       initialValues={user}
       disabled={isDisable}
     >
+      <ToastContainer autoClose={3000} />
       <Form.Item
         name="username"
         label="Username"
@@ -104,13 +108,24 @@ function AntNestForm({ user, isDisable }) {
         <Input disabled="disable" />
       </Form.Item>
       <Form.Item name="birthday" label="Birthday">
-        <DatePicker value={birthday} onChange={(_, dateString) => setBirthday(dateString)}/>
+        <DatePicker defaultValue={moment(birthday, 'YYYY-MM-DD')} value={birthday} onChange={(_, dateString) => setBirthday(dateString)}/>
+      </Form.Item>
+      <Form.Item
+        name="gender"
+        label="Gender"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input maxLength={3} value={gender} onChange={(e)=>setGender(e.target.value)} />
       </Form.Item>
       <Form.Item name="bio" label="Bio">
         <Input.TextArea maxLength={200} value={bio} onChange={(e)=>setBio(e.target.value)}/>
       </Form.Item>
 
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
         <Button type="submit"  onClick={onSubmit}>
           Submit
         </Button>
