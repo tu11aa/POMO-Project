@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Collapse, Typography, Button, Input, Space } from 'antd';
 import styled from 'styled-components';
 import { PlusSquareOutlined, SearchOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRooms } from '../../features/room/roomSlice';
 
 const { Panel } = Collapse;
 const { Search } = Input;
@@ -30,15 +32,24 @@ const LinkStyled = styled(Typography.Link)`
 `;
 
 export default function RoomList() {
+  const dispatch = useDispatch()
+
+  const {rooms} = useSelector((state)=>state.room)
+
+  useEffect(()=>{dispatch(getRooms())},[dispatch])
+
   const handleAddRoom = () => {
-    console.log('Addroom')
+    console.log("add room")
+    console.log(rooms)
   };
+
   return (
     <Collapse ghost defaultActiveKey={['1']}>
       <PanelStyled header='Danh sách các phòng' key='1'>
-        <LinkStyled>Room 1</LinkStyled>
-        <LinkStyled>Room 2</LinkStyled>
-        <LinkStyled>Room 3</LinkStyled>
+        <ul className='list-group'>
+          {rooms.map((room)=>{ return <LinkStyled key={room._id} >{room.name}</LinkStyled>})}
+        </ul>
+        
         <Button
           type='text'
           icon={<PlusSquareOutlined />}

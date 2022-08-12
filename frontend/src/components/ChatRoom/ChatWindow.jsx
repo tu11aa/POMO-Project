@@ -1,8 +1,9 @@
 import { UserAddOutlined } from '@ant-design/icons';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Button, Tooltip, Avatar, Form, Input, Alert } from 'antd';
 import Message from './Message';
+import { useDispatch } from 'react-redux';
 
 const HeaderStyled = styled.div`
   display: flex;
@@ -67,6 +68,7 @@ const MessageListStyled = styled.div`
 `;
 
 export default function ChatWindow() {
+  const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
     console.log('handleInputChange')
