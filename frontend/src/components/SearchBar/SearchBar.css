@@ -1,14 +1,13 @@
 #Search {
   position: relative;
   width: 100%;
-  background-color: red;
 }
 #InputSearch {
   width: 70%;
   font-size: 1rem;
   margin: 20px auto;
   border-radius: 10px;
-  box-shadow: 0 10px 20px #15375e, 0 0 0 10px #ffffffeb;
+  box-shadow: 0 5px 20px #15375e, 0 0 0 5px #ffffffeb;
   transform: scale(0.9);
 }
 #s-cover {
@@ -68,9 +67,9 @@
 }
 
 #s-cover:hover #s-circle {
-  top: -1px;
-  width: 67px;
-  height: 15px;
+  top: 2px;
+  width: 46px;
+  height: 8px;
   border-width: 0;
   background-color: #fff;
   border-radius: 20px;
@@ -95,7 +94,7 @@
 }
 #s-cover:hover button span:before,
 #s-cover:hover button span:after {
-  right: -6px;
-  width: 40px;
+  right: 14px;
+  width: 32px;
   background-color: #fff;
 }
