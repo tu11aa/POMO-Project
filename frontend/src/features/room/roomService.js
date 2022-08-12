@@ -30,6 +30,23 @@ const getRooms = async (token) => {
   } else throw new Error(response.data.message);
 };
 
+const getChatbox = async (roomID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      roomID,
+    },
+  };
+
+  const response = await axios.get("/api/chatboxes" + "/", config);
+
+  if (response.data.success) {
+    return response.data.data;
+  } else throw new Error(response.data.message);
+};
+
 const deleteRoom = async (roomID, token) => {
   const config = {
     headers: {
@@ -67,6 +84,7 @@ const todoService = {
   getRooms,
   deleteRoom,
   updateRoom,
+  getChatbox,
 };
 
 export default todoService;

@@ -3,6 +3,8 @@ import roomService from "./roomService";
 
 const initialState = {
   rooms: [],
+  room: null,
+  messages: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -33,6 +35,24 @@ export const getRooms = createAsyncThunk(
     try {
       const token = JSON.parse(localStorage.getItem("user")).token;
       return await roomService.getRooms(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getChatbox = createAsyncThunk(
+  "todo/getChatbox",
+  async (roomID, thunkAPI) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user")).token;
+      return await roomService.getChatbox(roomID, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -90,6 +110,9 @@ export const roomSlice = createSlice({
       state.isSuccess = false;
       state.isLoading = false;
       state.message = "";
+    },
+    setRoom: (state, action) => {
+      state.room = state.rooms[action.payload];
     },
   },
   extraReducers: (builder) => {
@@ -149,9 +172,23 @@ export const roomSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      //getChatbox
+      .addCase(getChatbox.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getChatbox.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.messages = action.payload.messageIDs;
+      })
+      .addCase(getChatbox.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
 
-export const { reset } = roomSlice.actions;
+export const { reset, setRoom } = roomSlice.actions;
 export default roomSlice.reducer;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 // Sections
 import TaskList from "../components/Sections/TaskList";
@@ -8,7 +8,7 @@ export default function PomoMode() {
   return (
     <BgHome>
       <HomeButton />
-      <div className="container" style={{ height: "100vh" }}>
+      <div className="container" style={{ height: '90vh' }}>
         <Timer />
         <br />
         <TaskList />

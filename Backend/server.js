@@ -19,7 +19,7 @@ app.use("/api/systems", require("./routes/systemRoutes"));
 app.use("/api/rooms", require("./routes/system/roomRoutes"));
 app.use("/api/tasks", require("./routes/system/taskRoutes"));
 app.use("/api/reports", require("./routes/system/reportRoutes"));
-app.use("/api/chatboxs", require("./routes/system/chatboxRoutes"));
+app.use("/api/chatboxes", require("./routes/system/chatboxRoutes"));
 
 app.use(errorHandler); //use error handler
 

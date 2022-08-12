@@ -1,9 +1,10 @@
 import { UserAddOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Tooltip, Avatar, Form, Input, Alert } from 'antd';
 import Message from './Message';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChatbox } from '../../features/room/roomSlice';
 
 const HeaderStyled = styled.div`
   display: flex;
@@ -70,6 +71,13 @@ const MessageListStyled = styled.div`
 export default function ChatWindow() {
   const dispatch = useDispatch()
 
+  const {room, messages} = useSelector((state) => state.room)
+  console.log(messages)
+
+  useEffect(()=>{
+    if (room) dispatch(getChatbox(room._id))
+  }, [room, dispatch])
+
   const handleInputChange = (e) => {
     console.log('handleInputChange')
   };
@@ -79,15 +87,16 @@ export default function ChatWindow() {
   };
   return (
     <WrapperStyled>
+      {room ? (
       <>
         <HeaderStyled>
           <div className='header__info'>
-            <p className='header__title'>Room 1</p>
+            <p className='header__title'>{room.name}</p>
             <span className='header__description'>
-              Đây là Room 1
+              ID: {room._id}
             </span>
           </div>
-          <ButtonGroupStyled>
+          {/* <ButtonGroupStyled>
             <Button
               icon={<UserAddOutlined />}
               type='text'
@@ -105,15 +114,13 @@ export default function ChatWindow() {
                 <Avatar>C</Avatar>
               </Tooltip>
             </Avatar.Group>
-          </ButtonGroupStyled>
+          </ButtonGroupStyled> */}
         </HeaderStyled>
         <ContentStyled>
           <MessageListStyled>
-            <Message text="Text" photoURL={null} displayName="Tu" createdAt={1231231312} />
-            <Message text="Text123" photoURL={null} displayName="Tu" createdAt={1231231312} />
-            <Message text="Text12312312" photoURL={null} displayName="Tu" createdAt={1231231312} />
-            <Message text="Text12312312" photoURL={null} displayName="Tu" createdAt={1231231312} />
-            <Message text="Text12312321312" photoURL={null} displayName="Tu" createdAt={1231231312} />
+            {messages.map((message)=> {
+              return <Message text={message.content} photoURL={null} displayName={message.userID.username} createdAt={message.createdAt} />;
+            })}
           </MessageListStyled>
           <FormStyled>
             <Form.Item name='message'>
@@ -137,6 +144,7 @@ export default function ChatWindow() {
         style={{ margin: 5 }}
         closable
       />
+      )}
     </WrapperStyled>
   );
 }
