@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AntNestForm from "../AntdForm/AntNestForm";
+import { useDispatch } from "react-redux";
 
 function UserInfo() {
-  let user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
+  const dispatch = useDispatch()
+  
+  const handleUpdate = (e) => {
+    setDisable(disable==true?false:true)
+  }
+  
   const [disable, setDisable] = useState(false);
 
   return (
@@ -23,7 +30,7 @@ function UserInfo() {
           />
           <p>Profile</p>
         </div>
-        <ButtonUpdate onClick={() => setDisable(true)}>Update</ButtonUpdate>
+        <ButtonUpdate onClick={handleUpdate}>Update</ButtonUpdate>
       </Title>
       <AntNestForm user={user} isDisable={disable} />
     </InfoGroup>

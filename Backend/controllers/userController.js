@@ -75,7 +75,11 @@ const loginUser = asyncHandler(async (req, res) => {
       data = {
         _id: user._id,
         username: user.username,
+        fullname: user.fullname,
         email: user.email,
+        nickname: user.nickname,
+        bio: user.bio,
+        dob: user.dob,
         token: authHelper.generateToken(user._id, "30d"),
       };
 
