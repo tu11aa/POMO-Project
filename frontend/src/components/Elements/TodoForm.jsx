@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addTask } from '../../features/todolist/todoSlice';
@@ -14,10 +14,24 @@ const TodoForm = () => {
     setContent("")
   }
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        // callMyFunction();
+        handleSubmit(event)
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [content]);
+
 	return (
     <Wrapper>
       <Form>
-          <input type="text" placeholder="Enter your task here" value={content} onChange={(e)=>setContent(e.target.value)} id="fname" name="fname" className="font20 extraBold" />
+          <input maxLength={40} type="text" placeholder="Enter your task here" value={content} onChange={(e)=>setContent(e.target.value)} id="fname" name="fname" className="Calibri" style={{fontWeight: 'bold', fontSize: 20}}/>
       </Form>
       
       <AddButton type="submit" value="Add" onClick={handleSubmit} className="pointer animate radius8" style={{ maxWidth: "200px" } } />
