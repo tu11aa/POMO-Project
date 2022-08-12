@@ -35,7 +35,7 @@ function AntNestForm({ user, isDisable }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+      // isDisable = true
       dispatch(updateUser({ userID : JSON.parse(localStorage.getItem("user"))._id, data : {
         fullname,
         nickname,
@@ -78,7 +78,7 @@ function AntNestForm({ user, isDisable }) {
           },
         ]}
       >
-        <Input value={fullname} onChange={(e)=>setFullname(e.target.values)}/>
+        <Input value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
       </Form.Item>
       <Form.Item
         name="nickname"
@@ -89,7 +89,7 @@ function AntNestForm({ user, isDisable }) {
           },
         ]}
       >
-        <Input />
+        <Input value={nickname} onChange={(e)=>setNickname(e.target.value)}/>
       </Form.Item>
       <Form.Item
         name="email"
@@ -104,14 +104,14 @@ function AntNestForm({ user, isDisable }) {
         <Input disabled="disable" />
       </Form.Item>
       <Form.Item name="birthday" label="Birthday">
-        <DatePicker />
+        <DatePicker value={birthday} onChange={(_, dateString) => setBirthday(dateString)}/>
       </Form.Item>
       <Form.Item name="bio" label="Bio">
-        <Input.TextArea />
+        <Input.TextArea maxLength={200} value={bio} onChange={(e)=>setBio(e.target.value)}/>
       </Form.Item>
 
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit" onClick={onSubmit}>
+        <Button type="submit"  onClick={onSubmit}>
           Submit
         </Button>
       </Form.Item>
