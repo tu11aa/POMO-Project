@@ -8,13 +8,14 @@ const formItemLayout = {
   },
 };
 
-const FormCreateRoom = () => {
+const FormCreateRoom = ({ isShow }) => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
 
   return (
     <Form
+      style={{ display: `${isShow}` }}
       name="validate_other"
       {...formItemLayout}
       onFinish={onFinish}

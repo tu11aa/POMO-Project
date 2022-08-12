@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Collapse, Typography, Button, Input, Space } from "antd";
 import styled from "styled-components";
 import { PlusSquareOutlined, SearchOutlined } from "@ant-design/icons";
@@ -34,7 +34,7 @@ const LinkStyled = styled(Typography.Link)`
 
 export default function RoomList() {
   const dispatch = useDispatch();
-
+  const [isShow, setIsShow] = useState("none");
   const { rooms } = useSelector((state) => state.room);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function RoomList() {
   }, [dispatch]);
 
   const handleAddRoom = () => {
-    console.log("add room");
+    "block" === isShow ? setIsShow("none") : setIsShow("block");
     console.log(rooms);
   };
 
@@ -54,7 +54,6 @@ export default function RoomList() {
             return <LinkStyled key={room._id}>{room.name}</LinkStyled>;
           })}
         </ul>
-
         <Button
           type="text"
           icon={<PlusSquareOutlined />}
@@ -64,10 +63,7 @@ export default function RoomList() {
           Thêm phòng
         </Button>
       </PanelStyled>
-      <div style={{ textAlign: "center", color: "red", margin: "10px auto" }}>
-        CREATE NEW ROOM
-      </div>
-      <FormCreateRoom />
+      <FormCreateRoom isShow={isShow} />
     </Collapse>
   );
 }

@@ -7,13 +7,11 @@ import PomoMode from "./pages/PomoMode";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import ChatRoom from "./components/ChatRoom/index";
-import FormCreateRoom from "./components/FormCreateRoom/FormCreateRoom";
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/form" element={<FormCreateRoom />} />
           <Route path="/" element={<Landing />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
