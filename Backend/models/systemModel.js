@@ -155,6 +155,49 @@ const removeduserSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+//chua xong
+const message = mongoose.Schema(
+  {
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    content: {
+      type: String,
+      required: [true, "Please add a task"],
+    },
+    time: {
+      type: Date,
+      required: [true, "Please add a time"],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const chatboxSchema = mongoose.Schema(
+  {
+    roomID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Room",
+      required: true,
+    },
+    messageIDs: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Message",
+        },
+      ],
+      default: [],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // const Schedule = mongoose.model("Schedule", scheduleSchema);
 const Task = mongoose.model("Task", taskSchema);
@@ -162,5 +205,15 @@ const Room = mongoose.model("Room", roomSchema);
 const Report = mongoose.model("Reported User", reportSchema);
 const Blacklist = mongoose.model("Blacklist", blacklistSchema);
 const RemovedUser = mongoose.model("Removed User", removeduserSchema);
+const Message = mongoose.model("Message", message);
+const Chatbox = mongoose.model("Chatbox", chatboxSchema);
 
-module.exports = { Task, Room, Report, Blacklist, RemovedUser };
+module.exports = {
+  Task,
+  Room,
+  Report,
+  Blacklist,
+  RemovedUser,
+  Message,
+  Chatbox,
+};

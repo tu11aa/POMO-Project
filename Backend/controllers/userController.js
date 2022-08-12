@@ -6,6 +6,17 @@ const helper = require("../helpers/helper");
 const methodHelper = require("../helpers/methodHelper");
 const { User } = require("../models/userModels");
 
+const updateUser = asyncHandler(async (req, res) => {
+  methodHelper.updateDocument(
+    res,
+    User,
+    "User",
+    req.params.id,
+    req.body,
+    async (user) => await user._id.equals(req.user._id)
+  );
+});
+
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, fullname } = req.body;
 
@@ -112,4 +123,5 @@ module.exports = {
   getUser,
   deleteUser,
   getUsers,
+  updateUser,
 };

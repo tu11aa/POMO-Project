@@ -17,9 +17,9 @@ app.use("/api/admins", require("./routes/adminRoutes"));
 app.use("/api/systems", require("./routes/systemRoutes"));
 
 app.use("/api/rooms", require("./routes/system/roomRoutes"));
-app.use("/api/schedules", require("./routes/system/scheduleRoutes"));
 app.use("/api/tasks", require("./routes/system/taskRoutes"));
 app.use("/api/reports", require("./routes/system/reportRoutes"));
+app.use("/api/chatboxs", require("./routes/system/chatboxRoutes"));
 
 app.use(errorHandler); //use error handler
 

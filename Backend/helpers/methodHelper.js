@@ -15,7 +15,7 @@ methodHelper.createDocument = async (
   const model = await Model.create(data);
   if (model) {
     if (callback) await callback(model);
-    if (!stop) helper.sendRes(res, httpStatus.OK, model);
+    if (!stop) helper.sendRes(res, httpStatus.CREATED, model);
   } else {
     if (!stop)
       helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Invalid data");
