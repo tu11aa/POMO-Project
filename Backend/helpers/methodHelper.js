@@ -28,7 +28,8 @@ methodHelper.updateDocument = async (
   modelName,
   id,
   data,
-  isAuthorized = null
+  isAuthorized = null,
+  token = null
 ) => {
   const model = await Model.findById(id);
   if (!model) {
@@ -43,7 +44,15 @@ methodHelper.updateDocument = async (
     new: true,
   });
 
-  helper.sendRes(res, httpStatus.OK, updatedModel);
+  let updatedData = null;
+  if (token) {
+    updatedData = {
+      ...updatedModel._doc,
+      token,
+    };
+  } else updatedData = updatedModel;
+
+  helper.sendRes(res, httpStatus.OK, updatedData);
 };
 
 methodHelper.deleteDocument = async (

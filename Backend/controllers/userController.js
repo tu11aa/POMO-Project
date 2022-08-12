@@ -13,7 +13,8 @@ const updateUser = asyncHandler(async (req, res) => {
     "User",
     req.params.id,
     req.body,
-    async (user) => await user._id.equals(req.user._id)
+    async (user) => await user._id.equals(req.user._id),
+    req.headers.authorization.split(" ")[1]
   );
 });
 
