@@ -13,7 +13,7 @@ export default function Projects() {
       <div className="whiteBg">
         <div className="container">
           <HeaderInfo>
-            <h1 className="font40 extraBold">Why choosing us</h1>
+            <h1 className="font40 extraBold">Why choose us</h1>
             <p className="font13">
               Aside of the main Pomodoro techniques, we offer you with some music which helps your work time more interesting
               <br />
