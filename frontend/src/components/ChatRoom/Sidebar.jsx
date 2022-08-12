@@ -1,8 +1,9 @@
-import React from 'react';
-import { Row, Col } from 'antd';
-import UserInfo from './UserInfo';
-import RoomList from './RoomList';
-import styled from 'styled-components';
+import React from "react";
+import { Row, Col, Input } from "antd";
+import UserInfo from "./UserInfo";
+import RoomList from "./RoomList";
+import styled from "styled-components";
+import SearchBar from "../SearchBar/SearchBar";
 
 const SidebarStyled = styled.div`
   background: #15375e;
@@ -16,6 +17,9 @@ export default function Sidebar() {
       <Row>
         <Col span={24}>
           <UserInfo />
+        </Col>
+        <Col span={24}>
+          <SearchBar />
         </Col>
         <Col span={24}>
           <RoomList />

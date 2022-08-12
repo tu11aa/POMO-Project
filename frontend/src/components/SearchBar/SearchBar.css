@@ -1,0 +1,101 @@
+#Search {
+  position: relative;
+  width: 100%;
+  background-color: red;
+}
+#InputSearch {
+  width: 70%;
+  font-size: 1rem;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px #15375e, 0 0 0 10px #ffffffeb;
+  transform: scale(0.9);
+}
+#s-cover {
+  position: absolute;
+  top: -13px;
+  right: 62px;
+}
+#s-cover button {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 96px;
+  cursor: pointer;
+}
+.td {
+  width: 10px;
+}
+#s-circle {
+  position: relative;
+  top: -7px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  margin-top: 0;
+  border-width: 15px;
+  border: 4px solid #fff;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.5s ease all;
+}
+
+#s-cover button span {
+  position: absolute;
+  top: 43px;
+  left: 14px;
+  display: block;
+  width: 45px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+#s-cover button span:before,
+#s-cover button span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 7px;
+  background-color: #fff;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle {
+  top: -1px;
+  width: 67px;
+  height: 15px;
+  border-width: 0;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+#s-cover:hover span {
+  top: 50%;
+  left: 56px;
+  width: 25px;
+  margin-top: -9px;
+  transform: rotateZ(0);
+}
+
+#s-cover:hover button span:before {
+  bottom: 11px;
+  transform: rotateZ(52deg);
+}
+
+#s-cover:hover button span:after {
+  bottom: -11px;
+  transform: rotateZ(-52deg);
+}
+#s-cover:hover button span:before,
+#s-cover:hover button span:after {
+  right: -6px;
+  width: 40px;
+  background-color: #fff;
+}
