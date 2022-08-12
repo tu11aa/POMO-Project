@@ -8,7 +8,7 @@ export default function PomoMode() {
   return (
     <BgHome>
       <HomeButton />
-      <div className="container" style={{height:"100vh"}}>
+      <div className="container" >
         <Timer />
         <br />
         <TaskList />
@@ -22,5 +22,6 @@ const BgHome = styled.div`
   height: 100vh; */
   width: auto;
   /* background: #f3d8d8; */
-  background: url(https://img.freepik.com/free-vector/pastel-ombre-background-pink-purple_53876-120750.jpg?w=2000);
+  background: rgb(255,226,226);
+background: linear-gradient(90deg, rgba(255,226,226,1) 0%, rgba(177,168,255,1) 100%, rgba(228,185,255,1) 100%);
 `;

@@ -43,6 +43,6 @@ const Item = styled.div`
   margin-top: 20px;
   /* padding: 70px 0 30px 0; */
   color: black;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: medium;
+  font-family: 'Calibri'; //, 'Arial Narrow', Arial, sans-serif
+  font-size: Large;
 `;
