@@ -23,7 +23,7 @@ export default function Header() {
                   <FullButton title="START POMO MODE" action={() => navigate("/pomomode")} />
                 </div>
                 <div style={{ width: "190px", marginLeft: "15px" }}>
-                  <FullButton title="SOCIAL MODE" action={() => alert("clicked")} border />
+                  <FullButton title="SOCIAL MODE" action={() => navigate("/room")} />
                 </div>
               </ButtonsRow>
         </div>

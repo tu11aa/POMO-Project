@@ -18,7 +18,7 @@ function App() {
           <Route path="/pomomode" element={<PomoMode />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/chat" element={<ChatRoom />} />
+          <Route path="/room" element={<ChatRoom />} />
         </Routes>
       </Router>
     </>
