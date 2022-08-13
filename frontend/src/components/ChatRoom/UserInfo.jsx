@@ -1,7 +1,8 @@
 import React from 'react';
 import { LeftOutlined } from '@ant-design/icons';
-import { Button, Avatar, Typography } from 'antd';
+import { Avatar, Typography } from 'antd';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 
 const WrapperStyled = styled.div`
@@ -23,15 +24,19 @@ const WrapperStyled = styled.div`
 `;
 
 export default function UserInfo() {
+  const navigate = useNavigate()
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const handleBack = () => {
-    console.log('A')
+    navigate("/")
   };
   return (
     <WrapperStyled>
       <div>
         <LeftOutlined className='backhome' size="large" onClick={handleBack}/>
-        <Avatar size={55}>A</Avatar>
-        <Typography.Text className='username' variant="h2" >Username</Typography.Text>
+        <Avatar size={60}>{user.username[0]}</Avatar>
+        <Typography.Text className='username' variant="h2" >{user.username}</Typography.Text>
       </div>
       {/* <Button ghost>Đăng xuất</Button> */}
     </WrapperStyled>

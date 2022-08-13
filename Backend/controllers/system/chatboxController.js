@@ -52,7 +52,7 @@ const updateChatbox = asyncHandler(async (req, res) => {
 
 const getChatbox = asyncHandler(async (req, res) => {
   const chatbox = await Chatbox.findOne({
-    roomID: req.body.roomID,
+    roomID: req.query.roomID,
   }).populate({
     path: "messageIDs",
     populate: { path: "userID", select: "username" },
