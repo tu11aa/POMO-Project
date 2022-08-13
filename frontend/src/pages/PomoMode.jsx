@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 // Sections
 import TaskList from "../components/Sections/TaskList";
