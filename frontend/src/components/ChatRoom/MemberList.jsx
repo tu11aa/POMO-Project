@@ -12,9 +12,9 @@ export default function MemberList() {
   const [isShow, setIsShow] = useState("none");
   const { room } = useSelector((state) => state.room);
 
-  // useEffect(() => {
-  //   dispatch(getRooms());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getRooms());
+  }, [dispatch]);
 
   const handleClick = (index) => {
     

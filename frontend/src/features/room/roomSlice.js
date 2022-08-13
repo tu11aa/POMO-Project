@@ -4,6 +4,7 @@ import roomService from "./roomService";
 const initialState = {
   rooms: [],
   room: null,
+  chatbox: null,
   messages: [],
   isError: false,
   isSuccess: false,
@@ -198,9 +199,25 @@ export const roomSlice = createSlice({
       .addCase(getChatbox.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.chatbox = action.payload;
         state.messages = action.payload.messageIDs;
       })
       .addCase(getChatbox.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      //addChatbox
+      .addCase(addChat.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addChat.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        // state.chatbox = action.payload;
+        // state.messages = action.payload.messageIDs;
+      })
+      .addCase(addChat.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

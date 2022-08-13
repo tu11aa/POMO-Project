@@ -1,10 +1,10 @@
 import { UserAddOutlined } from '@ant-design/icons';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Tooltip, Avatar, Form, Input, Alert } from 'antd';
 import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChatbox } from '../../features/room/roomSlice';
+import { addChat, getChatbox } from '../../features/room/roomSlice';
 
 const HeaderStyled = styled.div`
   display: flex;
@@ -71,19 +71,23 @@ const MessageListStyled = styled.div`
 export default function ChatWindow() {
   const dispatch = useDispatch()
 
-  const {room, messages} = useSelector((state) => state.room)
-  console.log(messages)
+  const {room, chatbox} = useSelector((state) => state.room)
+  const [content, setContent] = useState("")
 
   useEffect(()=>{
     if (room) dispatch(getChatbox(room._id))
   }, [room, dispatch])
 
+  useEffect(()=>{
+    if (chatbox) dispatch(getChatbox(room._id))
+  }, [chatbox, dispatch])
+
   const handleInputChange = (e) => {
-    console.log('handleInputChange')
+    setContent(e.target.value)
   };
 
   const handleOnSubmit = () => {
-    console.log('handleOnSubmit')
+    dispatch(addChat({chatboxID:chatbox._id, data: {content}}))
   };
   return (
     <WrapperStyled>
@@ -118,9 +122,9 @@ export default function ChatWindow() {
         </HeaderStyled>
         <ContentStyled>
           <MessageListStyled>
-            {messages.map((message)=> {
+            {chatbox ? chatbox.messageIDs.map((message)=> {
               return <Message text={message.content} photoURL={null} displayName={message.userID.username} createdAt={message.createdAt} />;
-            })}
+            }):<Message/>}
           </MessageListStyled>
           <FormStyled>
             <Form.Item name='message'>
@@ -128,6 +132,7 @@ export default function ChatWindow() {
                 placeholder='Nhập tin nhắn...'
                 bordered={false}
                 autoComplete='off'
+                onChange={handleInputChange}
               />
             </Form.Item>
             <Button type='primary' onClick={handleOnSubmit}>

@@ -25,7 +25,7 @@ const FormCreateRoom = ({ isShow }) => {
   }
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   return (
@@ -50,7 +50,6 @@ const FormCreateRoom = ({ isShow }) => {
         <Switch checked={checked} onChange={(checked)=> {
           setChecked(checked);
           setType(checked === true ? "Private" : "Public");
-          console.log(type)
         }} />
       </Form.Item>
       <Form.Item

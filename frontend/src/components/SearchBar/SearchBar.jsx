@@ -4,7 +4,7 @@ import "./SearchBar.css";
 function SearchBar() {
   return (
     <div id="Search">
-      <input id="InputSearch" type="text" placeholder="Search" />
+      <input id="InputSearch" type="text" placeholder="Join" />
       <div className="td" id="s-cover">
         <button type="submit">
           <div id="s-circle"></div>
