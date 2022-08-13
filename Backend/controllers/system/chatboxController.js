@@ -57,8 +57,11 @@ const getChatbox = asyncHandler(async (req, res) => {
     path: "messageIDs",
     populate: { path: "userID", select: "username" },
   });
-
-  helper.sendRes(res, httpStatus.OK, chatbox);
+  if (chatbox) helper.sendRes(res, httpStatus.OK, chatbox);
+  else
+    helper.sendRes(res, httpStatus.OK, {
+      messageIDs: [],
+    });
 });
 
 const deleteChatbox = asyncHandler(async (req, res) => {

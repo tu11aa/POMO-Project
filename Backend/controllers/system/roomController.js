@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const httpStatus = require("http-status");
 const helper = require("../../helpers/helper");
 const methodHelper = require("../../helpers/methodHelper");
-const { Room } = require("../../models/systemModel");
+const { Room, Chatbox } = require("../../models/systemModel");
 
 const getRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find({ roomMaster: req.user._id }).populate(
@@ -29,14 +29,26 @@ const createRoom = asyncHandler(async (req, res) => {
     helper.sendRes(res, 400, null, "Room with same name is extis");
   }
 
-  await methodHelper.createDocument(res, Room, {
-    type,
-    name,
-    password,
-    roomMaster: req.user._id,
-    memberIDs,
-    reportIDs,
-  });
+  await methodHelper.createDocument(
+    res,
+    Room,
+    {
+      type,
+      name,
+      password,
+      roomMaster: req.user._id,
+      memberIDs,
+      reportIDs,
+    },
+    async (room) =>
+      await methodHelper.createDocument(
+        res,
+        Chatbox,
+        { roomID: room._id },
+        null,
+        true
+      )
+  );
 });
 
 //route api/rooms/:id

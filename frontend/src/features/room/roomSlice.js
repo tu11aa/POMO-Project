@@ -13,10 +13,10 @@ const initialState = {
 
 export const createRoom = createAsyncThunk(
   "todo/createRoom",
-  async (task, thunkAPI) => {
+  async (room, thunkAPI) => {
     try {
       const token = JSON.parse(localStorage.getItem("user")).token;
-      return await roomService.createRoom(task, token);
+      return await roomService.createRoom(room, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -35,24 +35,6 @@ export const getRooms = createAsyncThunk(
     try {
       const token = JSON.parse(localStorage.getItem("user")).token;
       return await roomService.getRooms(token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
-export const getChatbox = createAsyncThunk(
-  "todo/getChatbox",
-  async (roomID, thunkAPI) => {
-    try {
-      const token = JSON.parse(localStorage.getItem("user")).token;
-      return await roomService.getChatbox(roomID, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -89,6 +71,42 @@ export const updateRoom = createAsyncThunk(
     try {
       const token = JSON.parse(localStorage.getItem("user")).token;
       return await roomService.updateRoom(update, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getChatbox = createAsyncThunk(
+  "todo/getChatbox",
+  async (roomID, thunkAPI) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user")).token;
+      return await roomService.getChatbox(roomID, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const addChat = createAsyncThunk(
+  "todo/addChat",
+  async (data, thunkAPI) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user")).token;
+      return await roomService.addChat(data, token);
     } catch (error) {
       const message =
         (error.response &&

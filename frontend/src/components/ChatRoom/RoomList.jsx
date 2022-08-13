@@ -3,7 +3,7 @@ import { Collapse, Typography, Button, Input, Space } from "antd";
 import styled from "styled-components";
 import { PlusSquareOutlined, SearchOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getRooms, setRoom } from "../../features/room/roomSlice";
+import { getChatbox, getRooms, setRoom } from "../../features/room/roomSlice";
 import FormCreateRoom from "../FormCreateRoom/FormCreateRoom";
 
 const { Panel } = Collapse;

@@ -30,23 +30,6 @@ const getRooms = async (token) => {
   } else throw new Error(response.data.message);
 };
 
-const getChatbox = async (roomID, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    params: {
-      roomID,
-    },
-  };
-
-  const response = await axios.get("/api/chatboxes" + "/", config);
-
-  if (response.data.success) {
-    return response.data.data;
-  } else throw new Error(response.data.message);
-};
-
 const deleteRoom = async (roomID, token) => {
   const config = {
     headers: {
@@ -79,12 +62,48 @@ const updateRoom = async (update, token) => {
   } else throw new Error(response.data.message);
 };
 
+const getChatbox = async (roomID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      roomID,
+    },
+  };
+
+  const response = await axios.get("/api/chatboxes" + "/", config);
+
+  if (response.data.success) {
+    return response.data.data;
+  } else throw new Error(response.data.message);
+};
+
+const addChat = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    "/api/chatboxes" + "/" + data.chatboxID,
+    data.data,
+    config
+  );
+
+  if (response.data.success) {
+    return response.data.data;
+  } else throw new Error(response.data.message);
+};
+
 const todoService = {
   createRoom,
   getRooms,
   deleteRoom,
   updateRoom,
   getChatbox,
+  addChat,
 };
 
 export default todoService;
