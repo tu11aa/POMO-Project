@@ -22,7 +22,7 @@ export default function About() {
                 icon="roller"
                 price="Back-end Developer"
                 title="Tu Le"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                text="Student of 20CLC08 HCMUS."
               />
             </TableBox>
             <TableBox>
@@ -30,7 +30,7 @@ export default function About() {
                 icon="monitor"
                 price="Front-end Developer"
                 title="Thuan Vo"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                text="Student of 20CLC08 HCMUS."
               />
             </TableBox>
             <TableBox>
@@ -38,7 +38,7 @@ export default function About() {
                 icon="browser"
                 price="UX-UI Designer"
                 title="Phuong Nguyen"
-                text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor."
+                text="Student of 20CLC08 HCMUS."
               />
             </TableBox>
           </TablesWrapper>
