@@ -16,7 +16,7 @@ const getRooms = asyncHandler(async (req, res) => {
 const createRoom = asyncHandler(async (req, res) => {
   const { type, name, password, memberIDs, reportIDs } = req.body;
 
-  if (!type || !name) {
+  if (!type || !name || !password) {
     helper.sendRes(
       res,
       httpStatus.BAD_REQUEST,
