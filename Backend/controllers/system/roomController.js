@@ -5,9 +5,10 @@ const methodHelper = require("../../helpers/methodHelper");
 const { Room, Chatbox } = require("../../models/systemModel");
 
 const getRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find({ roomMaster: req.user._id }).populate(
-    "reportIDs"
-  );
+  const rooms = await Room.find({ roomMaster: req.user._id }).populate({
+    path: "memberIDs",
+    select: "username",
+  });
 
   helper.sendRes(res, httpStatus.OK, rooms);
 });
@@ -64,14 +65,24 @@ const deleteRoom = asyncHandler(async (req, res) => {
 
 //route api/rooms/:id
 const updateRoom = asyncHandler(async (req, res) => {
-  await methodHelper.updateDocument(
-    res,
-    Room,
-    "Room",
-    req.params.id,
-    req.body,
-    async (room) => await room.roomMaster.equals(req.user._id)
-  );
+  const { name, type } = req.body;
+  if (!name && !type) {
+    const room = await Room.findById(req.params.id);
+    if (room) {
+      await room.memberIDs.push(req.query.memberID);
+      await room.save();
+      return helper.sendRes(res, httpStatus.OK, room);
+    } else helper.sendRes(res, httpStatus.BAD_REQUEST, null, "Room not found");
+  } else {
+    await methodHelper.updateDocument(
+      res,
+      Room,
+      "Room",
+      req.params.id,
+      req.body,
+      async (room) => await room.roomMaster.equals(req.user._id)
+    );
+  }
 });
 
 module.exports = {

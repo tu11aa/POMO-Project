@@ -10,26 +10,25 @@ const { Panel } = Collapse;
 export default function MemberList() {
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState("none");
-  const { rooms, room } = useSelector((state) => state.room);
+  const { room } = useSelector((state) => state.room);
 
-  useEffect(() => {
-    dispatch(getRooms());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getRooms());
+  // }, [dispatch]);
 
-  const handleRoomClick = (index) => {
-    dispatch(setRoom(index))
+  const handleClick = (index) => {
+    
   }
 
   return (
     <Collapse ghost defaultActiveKey={["1"]}>
       <PanelStyled header="Member List" key="1">
-        <ul className="list-group">
-          {rooms.map((room, index) => {
-            return <LinkStyled key={room._id} onClick={()=>handleRoomClick(index)}>{room.name}</LinkStyled>;
+        {room?(<ul className="list-group">
+          {room.memberIDs.map((user, index) => {
+            return <LinkStyled key={user._id} onClick={()=>handleClick(index)}>{user.username}</LinkStyled>;
           })}
-        </ul>
+        </ul>):<ul className="list-group"/>}
       </PanelStyled>
-      <FormCreateRoom isShow={isShow} />
     </Collapse>
   );
 }
