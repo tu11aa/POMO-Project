@@ -21,10 +21,19 @@ app.use("/api/tasks", require("./routes/system/taskRoutes"));
 app.use("/api/reports", require("./routes/system/reportRoutes"));
 app.use("/api/chatboxes", require("./routes/system/chatboxRoutes"));
 
-app.use(errorHandler); //use error handler
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-//need route, because its created and add to a schedule so routes seem difference
-// app.use("/api/tasks", require("./routes/system/taskRoutes"));
+  app.get("*", (_, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+  });
+} else {
+  app.get("/", (_, res) => {
+    res.status(200).json({ message: "Welcome to the MONO API" });
+  });
+}
+
+app.use(errorHandler); //use error handler
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
